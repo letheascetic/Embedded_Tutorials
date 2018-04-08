@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98b30f2e-2526-4658-b8b1-eb435cf8b9ca" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protocol/IIC.md" afterPath="$PROJECT_DIR$/protocol/IIC.md" />
-    </list>
+    <list default="true" id="98b30f2e-2526-4658-b8b1-eb435cf8b9ca" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +14,8 @@
       <file leaf-file-name="IIC.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/protocol/IIC.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="728">
-              <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+            <state relative-caret-position="674">
+              <caret line="59" column="36" lean-forward="false" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -200,8 +198,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protocol/IIC.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="728">
-          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+        <state relative-caret-position="674">
+          <caret line="59" column="36" lean-forward="false" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
           <folding />
         </state>
       </provider>
