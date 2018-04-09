@@ -1,6 +1,6 @@
 # CAN -- Controller Area Network
 
-* robust vehicle bus standard
+* multi-master serial and robust vehicle bus standard
 * message-based protocol
 
 ### references
