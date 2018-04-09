@@ -4,7 +4,7 @@
 
 * https://www.cnblogs.com/zhangjiansheng/p/7738390.html
 * https://www.cnblogs.com/bixiaopengblog/p/7469536.html
-https://www.cnblogs.com/xiaomeige/p/6509414.html
+* https://www.cnblogs.com/xiaomeige/p/6509414.html
 
 I2C(Inter-Integrated Circuit BUS) 集成电路总线
 
