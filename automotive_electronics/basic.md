@@ -1,4 +1,4 @@
-# 汽车电子基础
+# 汽车电子基础及趋势
 
 ## 汽车座舱电子发展
 
@@ -158,7 +158,97 @@
 * QNX operating system application -- More safety, speed. Accepted by over 40 OEMs
 * KANZI Graphic design tools application
 
-## 知识点
+## 汽车电子
+
+### 汽车电子分类
+
+* Driver Information
+* Audio Infotainment
+* Control System
+
+
+    Driver Information:
+        * Instrument Cluster -- 汽车仪表
+        * Driver Information Center
+        * Clock
+        * HUD
+    
+    Audio Infotainment:
+        * Radio
+        * DVD/Navigation System
+        * Amplifier
+    
+    Control System
+        * Climate Control Head
+        * Body Control Module -- 门锁控制、雨刮管理、防盗、车窗动作管理、电源模块管理、天窗控制
+        * Other Control Unit -- 远程无钥匙进入、动力控制模块
+        * BCM & BMS
+        * Integrated Center Panels
+
+### 汽车电子研发
+
+* System
+* Mechanical
+* Software
+
+#### Mechanical development
+
+* Styling & Innovation
+* Mechanical Design -- CAD HMI 结构件 公差分析
+* Product Design & Manufacture -- 光学贴合 模具 CAE（结构分析 热分析 光学分析 模流分析 照明分析等）
+* Design Verification
+* Precision Mechanical Rotary Design
+    
+#### Electronics
+
+* MatchCAD WCA 进行电路的设计, 分析和计算是否满足最坏情况应用
+* Saber 对电路进行仿真
+* DxDesigner 和 Expedition 互动式设计
+* 机械与电子的互动式设计
+* Hyperlynx 进行EMC 仿真
+* EMScan 进行EMC 整改及调试
+        
+#### Software
+
+##### Development Tool
+
+* Matlab - Modeling&Auto Coding Generation
+* Cosmic / IAR etc. - compiler
+* Lauterbach-TRACE32/ NEC Mini-cube/E1 etc. - source code debug
+* QAC - static source code analysis and make sure coding compliant to MISRA2004
+* VectorCAST – (单元测试) unit test
+* CI - (持续集成) continue integration
+* FTP – (功能测试) function test
+
+##### HMI Tool & GUI Technology
+
+* Altia, EB, TAT, Rightware Kanzi
+* QT
+* OpenGL -- Open Graphics Library
+* Open VG -- Vector Graphics
+
+##### 常见的需求
+
+* 里程控制算法
+* 蜂鸣器/喇叭/带功放的喇叭控制
+* 步进电机控制
+* 彩色屏/点阵屏/段码屏的液晶屏显示控制
+* 报警灯控制
+* 驾驶信息警告控制
+* 行车电脑
+* 车速表/转速表/油表/水温表
+* 背光控制
+* 工程测试模式/下线检测
+* LVDS输入与输出功能
+* 仪表ISO26262功能定义与实现
+* Autosar架构开发
+* MATLAB建模开发及in loop测试
+
+### Product Assurance
+
+### Advanced
+
+## 术语和知识点
 
     QNX
     GenIVI
@@ -167,4 +257,8 @@
     ASIL
     AUTOSAR -- AUTOmotive Open System Architecture
     KANZI STUDIO
-
+    
+    BCM -- body control module（车身控制系统）
+    RKE -- Remote Keyless Entry（远程门禁系统）
+    BMS -- Battery Management System（电池管理系统）
+    QAC -- Static Source Code Analysis
