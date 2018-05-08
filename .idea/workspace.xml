@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98b30f2e-2526-4658-b8b1-eb435cf8b9ca" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_data_link_layer.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_physical_layer.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/automotive_electronics/CAN-1.md" afterPath="$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_introduction.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_data_link_layer.md" afterPath="$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_data_link_layer.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +17,8 @@
         <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_physical_layer.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="10" lean-forward="false" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
+              <first_editor relative-caret-position="384">
+                <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="37" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -33,8 +30,8 @@
         <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_introduction.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="693">
-                <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <first_editor relative-caret-position="629">
+                <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="39" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -46,8 +43,8 @@
         <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_data_link_layer.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="96">
-                <caret line="3" column="2" lean-forward="true" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+              <first_editor relative-caret-position="657">
+                <caret line="90" column="0" lean-forward="true" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -80,8 +77,8 @@
         <option value="$PROJECT_DIR$/CAN-bus_tutorials/CAN-1.md" />
         <option value="$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_introduction.md" />
         <option value="$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_.md" />
-        <option value="$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_data_link_layer.md" />
         <option value="$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_physical_layer.md" />
+        <option value="$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_data_link_layer.md" />
       </list>
     </option>
   </component>
@@ -171,7 +168,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14479166" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14479166" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -507,8 +504,8 @@
     <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_physical_layer.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="10" lean-forward="false" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
+          <first_editor relative-caret-position="384">
+            <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="37" />
             <folding />
           </first_editor>
           <second_editor />
@@ -518,8 +515,8 @@
     <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_introduction.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="693">
-            <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <first_editor relative-caret-position="629">
+            <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="39" />
             <folding />
           </first_editor>
           <second_editor />
@@ -529,8 +526,8 @@
     <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_data_link_layer.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="96">
-            <caret line="3" column="2" lean-forward="true" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+          <first_editor relative-caret-position="657">
+            <caret line="90" column="0" lean-forward="true" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
