@@ -19,6 +19,7 @@
 ### CAN总线简介
 
 CAN：Controller Area Network，控制器局域网是一种能有效支持分布式控制和实时控制的串行通讯网络。
+
 CAN-bus： Controller Area Network-bus，控制器局域网总线技术
 
 * CAN-bus被制定成为国际标准：**ISO11898（高速）**和**ISO11519（低速）**
