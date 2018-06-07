@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Embedded_Tutorials.iml" filepath="$PROJECT_DIR$/.idea/Embedded_Tutorials.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../reading_notes/.idea/reading_notes.iml" filepath="$PROJECT_DIR$/../reading_notes/.idea/reading_notes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../torrent_collector/.idea/torrent_collector.iml" filepath="$PROJECT_DIR$/../torrent_collector/.idea/torrent_collector.iml" />
     </modules>
   </component>
 </project>
