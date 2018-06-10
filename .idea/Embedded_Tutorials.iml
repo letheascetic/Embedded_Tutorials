@@ -6,6 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="reading_notes" />
     <orderEntry type="module" module-name="torrent_collector" />
+    <orderEntry type="module" module-name="scrapy" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
