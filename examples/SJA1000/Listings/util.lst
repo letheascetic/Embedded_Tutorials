@@ -1,0 +1,54 @@
+C51 COMPILER V9.57.0.0   UTIL                                                              07/04/2018 14:49:53 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE UTIL
+OBJECT MODULE PLACED IN .\Objects\util.obj
+COMPILER INVOKED BY: D:\Keil\Keil_v5\C51\BIN\C51.EXE util.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\util.lst) OBJECT(.\Objects\util.obj)
+
+line level    source
+
+   1          #include "util.h" 
+   2          #include <reg52.h>
+   3          
+   4          #define T0_MASK 0x0F
+   5          
+   6          /*************************************************************
+   7           * 函数名称：TimerDelay
+   8           * 函数功能：通过定时器实现精确延时
+   9           * 输入参数：n 延时的10ms个数
+  10           * 输出参数：无
+  11           * 返回值：  无
+  12           * 注意事项：定时器的中断使能位不能置位
+  13          **************************************************************/
+  14          void Timer0Init(void)
+  15          {
+  16   1              TMOD &= ~T0_MASK;               //清楚旧设置
+  17   1              TMOD |= 0x01;                   //设置为16位定时模式
+  18   1      }
+  19          
+  20          void Timer0Delay(unsigned int n)
+  21          {
+  22   1              do{
+  23   2                      TL0 = LOW_BYTE(65536UL - CPUCLK / 100);
+  24   2                      TH0 = HIGH_BYTE(65536UL - CPUCLK / 100);
+  25   2                      TR0 = 1;
+  26   2                      while(!TF0);
+  27   2                      TR0 = 0;
+  28   2                      TF0 = 0;
+  29   2              }while(--n);
+  30   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     32    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

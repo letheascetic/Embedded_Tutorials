@@ -1,0 +1,6 @@
+".\Objects\STARTUP.obj",
+".\Objects\SJAhelper.obj",
+".\Objects\util.obj",
+".\Objects\test.obj" 
+TO ".\Objects\SJA1000" 
+PRINT(".\Listings\SJA1000.m51") RAMSIZE(256) 

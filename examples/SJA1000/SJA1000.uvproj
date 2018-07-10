@@ -46,7 +46,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>lesson1_1</OutputName>
+          <OutputName>SJA1000</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -370,9 +370,29 @@
               <FilePath>.\STARTUP.A51</FilePath>
             </File>
             <File>
-              <FileName>lesson1_1.c</FileName>
+              <FileName>SJAhelper.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\lesson1_1.c</FilePath>
+              <FilePath>.\SJAhelper.c</FilePath>
+            </File>
+            <File>
+              <FileName>SJA1000REG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\SJA1000REG.h</FilePath>
+            </File>
+            <File>
+              <FileName>util.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\util.c</FilePath>
+            </File>
+            <File>
+              <FileName>test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\test.c</FilePath>
+            </File>
+            <File>
+              <FileName>SJAhelper.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\SJAhelper.h</FilePath>
             </File>
           </Files>
         </Group>

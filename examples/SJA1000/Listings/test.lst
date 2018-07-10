@@ -1,0 +1,125 @@
+C51 COMPILER V9.57.0.0   TEST                                                              07/04/2018 14:49:53 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE TEST
+OBJECT MODULE PLACED IN .\Objects\test.obj
+COMPILER INVOKED BY: D:\Keil\Keil_v5\C51\BIN\C51.EXE test.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\test.lst) OBJECT(.\Objects\test.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          #include "util.h"
+   3          #include "SJAhelper.h"
+   4          
+   5          /*************************************************************/
+   6          sbit D1 = P1^0;
+   7          sbit SJA_RST = P1^2;
+   8          /* 验收滤波器的参数，接收所有帧 */
+   9          unsigned char SJA_CAN_Filter[] = {
+  10                  0x00, 0x00, 0x00, 0x00,                         //ACR0~ACR3
+  11                  0xff, 0xff, 0xff, 0xff                          //AMR0~AMR3
+  12          };
+  13          unsigned char SJA_CAN_Filter2[] = {
+  14                  0x21, 0x10, 0x05, 0x24,                         //ACR0~ACR3
+  15                  0x00, 0x00, 0x00, 0x03                          //AMR0~AMR3
+  16          };
+  17          unsigned char SJA_SEND_BUFFER[] = {
+  18                  0x08,                                                                                   //标准数据帧，数据长度=8
+  19                  0xEA, 0x60,                                                                             //帧ID=0x753
+  20                  0x55, 0x55, 0x55, 0x55, 0xaa, 0xaa, 0xaa, 0xaa  //帧数据
+  21          };
+  22          unsigned char SJA_RCV_BUFFER[13];
+  23          /*************************************************************/
+  24          void TestSJAConnect(void);
+  25          void TestSJASend(void);
+  26          void TestSJARcv(void);
+  27          void TestSJAFilter(void);
+  28          /*************************************************************/
+  29          void main(void)
+  30          {
+  31   1              TestSJASend();
+  32   1      }
+  33          /*************************************************************/
+  34          //SJA1000硬件连接测试
+  35          void TestSJAConnect(void)
+  36          {
+  37   1              Timer0Init();
+  38   1              D1 = 0;
+  39   1              for(;;){
+  40   2                      if(SJAConnectTest() == 1){
+  41   3                              D1 = !D1;
+  42   3                              Timer0Delay(100);
+  43   3                      }else{
+  44   3                              D1 = !D1;
+  45   3                              Timer0Delay(10);
+  46   3                      }
+  47   2              }
+  48   1      }
+  49          //SJA1000发送测试
+  50          void TestSJASend(void)
+  51          {
+  52   1              Timer0Init();
+  53   1              SJA_RST = 0;
+  54   1              Timer0Delay(50);
+C51 COMPILER V9.57.0.0   TEST                                                              07/04/2018 14:49:53 PAGE 2   
+
+  55   1              SJA_RST = 1;
+  56   1              SJAInit(0X00, 0X14, SJA_CAN_Filter);                    //初始化SJA1000，设置波特率1Mbps
+  57   1              for(;;){
+  58   2                      if(SJASendData(SJA_SEND_BUFFER, 0x02)){         //发送数据
+  59   3                              D1 = !D1;
+  60   3                              Timer0Delay(100);
+  61   3                      }else{
+  62   3                              D1 = !D1;
+  63   3                              Timer0Delay(10);
+  64   3                      }                       
+  65   2              }
+  66   1      }
+  67          
+  68          void TestSJARcv(void)
+  69          {
+  70   1              Timer0Init();
+  71   1              SJA_RST = 1;
+  72   1              Timer0Delay(50);
+  73   1              SJA_RST = 0;
+  74   1              SJAInit(0X00, 0X14, SJA_CAN_Filter);
+  75   1              for(;;){
+  76   2                      if(SJARcvData(SJA_RCV_BUFFER)){
+  77   3                              D1 = !D1;
+  78   3                              Timer0Delay(100);
+  79   3                      }else{
+  80   3                              D1 = !D1;
+  81   3                              Timer0Delay(10);
+  82   3                      }
+  83   2              }
+  84   1      }
+  85          
+  86          void TestSJAFilter(void)
+  87          {
+  88   1              Timer0Init();
+  89   1              SJA_RST = 1;
+  90   1              Timer0Delay(50);
+  91   1              SJA_RST = 0;
+  92   1              SJAInit(0X00, 0X14, SJA_CAN_Filter);
+  93   1              SJAConfigFilter(1, SJA_CAN_Filter2);
+  94   1              for(;;){
+  95   2                      if(SJARcvData(SJA_RCV_BUFFER)){
+  96   3                              D1 = !D1;
+  97   3                      }
+  98   2              }
+  99   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    214    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     40    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,313 @@
+C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/04/2018 14:49:52 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE SJAHELPER
+OBJECT MODULE PLACED IN .\Objects\SJAhelper.obj
+COMPILER INVOKED BY: D:\Keil\Keil_v5\C51\BIN\C51.EXE SJAhelper.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Lis
+                    -tings\SJAhelper.lst) OBJECT(.\Objects\SJAhelper.obj)
+
+line level    source
+
+   1          #include "SJAhelper.h"
+   2          #include "SJA1000REG.h"
+   3          
+   4          #define SJA_BASE_ADDR 0x7f00
+   5          #define STD_FRAMEID_LENTH 2
+   6          #define EXT_FRAMEID_LENTH 4
+   7          
+   8          xdata unsigned char *SJA_CS_Point = (xdata unsigned char *)SJA_BASE_ADDR;       //指针指向片外数据存储
+             -区
+   9          
+  10          /*************************************************************
+  11           * 写SJA1000寄存器
+  12          **************************************************************/
+  13          void WriteSJAReg(unsigned char regAdr, unsigned char value)
+  14          {
+  15   1              *(SJA_CS_Point + regAdr) = value;
+  16   1      }
+  17          
+  18          /*************************************************************
+  19           * 写SJA1000寄存器
+  20          **************************************************************/
+  21          unsigned char ReadSJAReg(unsigned char regAdr)
+  22          {
+  23   1              return (*(SJA_CS_Point + regAdr));
+  24   1      }
+  25          
+  26          /*************************************************************
+  27           * 函数名称：SetBitMask
+  28           * 函数功能：设置指定寄存器的指定位为1
+  29           * 输入参数：regAdr 寄存器地址
+  30           *                       bitValue 设置的位值
+  31           * 输出参数：无
+  32           * 返回值：  1=操作成功，0=操作失败
+  33          **************************************************************/
+  34          unsigned char SetBitMask(unsigned char regAdr, unsigned char bitValue)
+  35          {
+  36   1              unsigned char status;
+  37   1              unsigned char value;
+  38   1              
+  39   1              value = ReadSJAReg(regAdr);
+  40   1              value = value | bitValue;
+  41   1              WriteSJAReg(regAdr, value);
+  42   1              
+  43   1              status = ReadSJAReg(regAdr) == value ? 1 : 0;
+  44   1              return status;
+  45   1      }
+  46          
+  47          /*************************************************************
+  48           * 函数名称：ClearBitMask
+  49           * 函数功能：将指定寄存器的指定位清零
+  50           * 输入参数：regAdr 寄存器地址
+  51          *                        bitValue 设置的位值(bitValue中为1的位，对应的位被清零)
+  52           * 输出参数：无
+  53           * 返回值：  1=操作成功，0=操作失败
+C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/04/2018 14:49:52 PAGE 2   
+
+  54          **************************************************************/
+  55          unsigned char ClearBitMask(unsigned char regAdr, unsigned char bitValue)
+  56          {
+  57   1              unsigned char status;
+  58   1              unsigned char value;
+  59   1              
+  60   1              value = ReadSJAReg(regAdr);
+  61   1              value = value & (~bitValue);
+  62   1              WriteSJAReg(regAdr, value);
+  63   1              
+  64   1              status = ReadSJAReg(regAdr) == value ? 1 : 0;
+  65   1              return status;
+  66   1      }
+  67          
+  68          /*************************************************************
+  69           * 函数名称：WriteSJARegBlock
+  70           * 函数功能：连续写多个寄存器
+  71           * 输入参数：regAdr   寄存器起始地址
+  72           *                       valueBuf 写寄存器时使用的指针
+  73           *                       len      要连续写入的寄存器数
+  74           * 输出参数：无
+  75           * 返回值：  连续写入的寄存器数
+  76          **************************************************************/
+  77          unsigned char WriteSJARegBlock(unsigned char regAdr, unsigned char *valueBuf, unsigned char len)
+  78          {
+  79   1              unsigned char i;
+  80   1              for(i=0; i<len; i++){
+  81   2                      WriteSJAReg(regAdr + i, valueBuf[i]);
+  82   2              }
+  83   1              return (len > 0 ? i+1 : i);
+  84   1      }
+  85          
+  86          /*************************************************************
+  87           * 函数名称：ReadSJARegBlock
+  88           * 函数功能：连续读多个寄存器
+  89           * 输入参数：regAdr   寄存器起始地址
+  90           *                       valueBuf 读寄存器时使用的指针
+  91           *                       len      要连续读出的寄存器数
+  92           * 输出参数：无
+  93           * 返回值：  连续读到的寄存器数
+  94          **************************************************************/
+  95          unsigned char ReadSJARegBlock(unsigned char regAdr, unsigned char *valueBuf, unsigned char len)
+  96          {
+  97   1              unsigned char i;
+  98   1              for(i=0; i<len; i++){
+  99   2                      valueBuf[i] = ReadSJAReg(regAdr + i);
+ 100   2              }
+ 101   1              return (len > 0 ? i+1 : i);
+ 102   1      }
+ 103          
+ 104          /*************************************************************
+ 105           * 函数名称：SJAConnectTest
+ 106           * 函数功能：测试函数，验证主控制器和SJA1000的硬件连接
+ 107           * 输入参数：无
+ 108           * 输出参数：无
+ 109           * 返回值：  1=硬件连接正常，可以通信；0=通信故障
+ 110          **************************************************************/
+ 111          unsigned char SJAConnectTest(void)
+ 112          {
+ 113   1              unsigned char status;
+ 114   1              WriteSJAReg(REG_CAN_TEST, 0x55);
+ 115   1              status = ReadSJAReg(REG_CAN_TEST) == 0x55 ? 1 : 0;
+C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/04/2018 14:49:52 PAGE 3   
+
+ 116   1              return status;
+ 117   1      }
+ 118          
+ 119          /*************************************************************
+ 120           * 函数名称：SJAInit
+ 121           * 函数功能：CAN控制器初始化函数
+ 122           * 输入参数：brt0   总线定时器0
+ 123           *                       btr1   总线定时器1
+ 124           *                       filter 滤波器设置指针
+ 125           * 输出参数：无
+ 126           * 返回值：  无
+ 127          **************************************************************/
+ 128          void SJAInit(unsigned char btr0, unsigned char btr1, unsigned char *filter)
+ 129          {
+ 130   1              SetBitMask(REG_CAN_MODE, RM_RR_BIT);    //进入复位模式
+ 131   1              WriteSJAReg(REG_CAN_CDR, 0x88);         //设置分配寄存器（10001000）PeliCAN模式 
+ 132   1                                                                                              //CBP=0,CLKOff_BIT=1 不激活比较器旁路(建议激活)，不输出时钟
+ 133   1              WriteSJAReg(REG_CAN_MODE, 0x0d);                //AFM=1,STM=1 单滤波模式 只检测模式
+ 134   1              WriteSJARegBlock(REG_CAN_ACR0, filter, 8);      //配置验收代码/屏蔽寄存器
+ 135   1              WriteSJAReg(REG_CAN_BTR0, btr0);                        //配置总线定时器0
+ 136   1              WriteSJAReg(REG_CAN_BTR1, btr1);                        //配置总线定时器1
+ 137   1              WriteSJAReg(REG_CAN_OCR, 0x1A);                         //配置输出引脚为TX0和RX0，推挽模式
+ 138   1              ClearBitMask(REG_CAN_MODE, RM_RR_BIT);          //退出复位模式，进入工作模式
+ 139   1      }
+ 140          
+ 141          /*************************************************************
+ 142           * 函数名称：SetSJASendCmd
+ 143           * 函数功能：设置SJA1000发送类型，启动发送
+ 144           * 输入参数：cmd 发送命令 0:正常发送 1:单次发送 2:自发自收 0xff:中止发送
+ 145           * 输出参数：无
+ 146           * 返回值：  1=发送成功 0=发送失败
+ 147          **************************************************************/
+ 148          unsigned char SetSJASendCmd(unsigned char cmd)
+ 149          {
+ 150   1              unsigned char status;
+ 151   1              switch(cmd){
+ 152   2                      default:
+ 153   2                      case 0:
+ 154   2                              status = SetBitMask(REG_CAN_CMR, TR_BIT);                       //正常发送，置位TR_BIT
+ 155   2                              break;
+ 156   2                      case 1:
+ 157   2                              status = SetBitMask(REG_CAN_CMR, TR_BIT | AT_BIT);      //单次发送，置位TR_BIT | AT_BIT
+ 158   2                              break;
+ 159   2                      case 2:
+ 160   2                              status = SetBitMask(REG_CAN_CMR, TR_BIT | SRR_BIT);     //自发自收
+ 161   2                              break;
+ 162   2                      case 0xff:
+ 163   2                              status = SetBitMask(REG_CAN_CMR, AT_BIT);
+ 164   2                              break;
+ 165   2              }
+ 166   1              return status;
+ 167   1      }
+ 168          
+ 169          /*************************************************************
+ 170           * 函数名称：SJASendData
+ 171           * 函数功能：发送函数
+ 172           * 输入参数：dataBuf 发送CAN帧缓冲区
+ 173           *                       cmd 发送命令 0:正常发送 1:单次发送 2:自发自收
+ 174           * 输出参数：无
+ 175           * 返回值：  1=发送成功 0=发送失败
+ 176          **************************************************************/
+ 177          unsigned char SJASendData(unsigned char *dataBuf, unsigned char cmd)
+C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/04/2018 14:49:52 PAGE 4   
+
+ 178          {
+ 179   1              unsigned char status = 0;
+ 180   1              unsigned char len, dlc;
+ 181   1              //判断SJA发送缓冲区是否锁定或正在发送
+ 182   1              unsigned char sr;
+ 183   1              sr = ReadSJAReg(REG_CAN_SR);
+ 184   1              if((sr & (TBS_BIT | TCS_BIT)) != (TBS_BIT | TCS_BIT))
+ 185   1              {
+ 186   2                      status = 0;
+ 187   2              }
+ 188   1              else{
+ 189   2                      dlc = (*dataBuf & 0x0f);        //从发送缓冲区的帧信息中取得CAN数据长度
+ 190   2                      dlc = dlc > 8 ? 8 : dlc;
+ 191   2                      switch(*dataBuf & 0xc0){
+ 192   3                              case 0x00:                                                                      //标准数据帧
+ 193   3                                      len = STD_FRAMEID_LENTH + dlc + 1;
+ 194   3                                      break;
+ 195   3                              case 0x40:                                                                      //标准远程帧
+ 196   3                                      len = STD_FRAMEID_LENTH + 1;
+ 197   3                                      break;
+ 198   3                              case 0x80:                                                                      //扩展数据帧
+ 199   3                                      len = EXT_FRAMEID_LENTH + dlc + 1;
+ 200   3                                      break;  
+ 201   3                              case 0xc0:                                                                      //扩展远程帧
+ 202   3                                      len = EXT_FRAMEID_LENTH + 1;
+ 203   3                                      break;
+ 204   3                              default:
+ 205   3                                      len = 0;
+ 206   3                                      status = 0;
+ 207   3                                      break;
+ 208   3                      }
+ 209   2                      if(len){
+ 210   3                              WriteSJARegBlock(REG_CAN_TXFMINFO, dataBuf, len);
+ 211   3                              status = SetSJASendCmd(cmd);
+ 212   3                      }
+ 213   2              }
+ 214   1              return status;
+ 215   1      }
+ 216          
+ 217          /*************************************************************
+ 218           * 函数名称：SJARcvData
+ 219           * 函数功能：通过查询方式读取接收缓冲区中的CAN报文
+ 220           * 输入参数：dataBuf 指向存储报文使用的空间的指针
+ 221           * 输出参数：无
+ 222           * 返回值：  1=读取报文成功 0=没有收到报文
+ 223          **************************************************************/
+ 224          unsigned char SJARcvData(unsigned char *dataBuf)
+ 225          {
+ 226   1              unsigned char status = 0;
+ 227   1              unsigned char dlc, len;
+ 228   1              if((ReadSJAReg(REG_CAN_SR) & RBS_BIT) == 0){
+ 229   2                      status = 0;
+ 230   2              }else{
+ 231   2                      *dataBuf = ReadSJAReg(REG_CAN_RXFMINFO);
+ 232   2                      dlc = (*dataBuf & 0x0f);
+ 233   2                      dlc = dlc > 8 ? 8 : dlc;
+ 234   2                      //根据帧类型确定接收缓冲区中有效数据长度
+ 235   2                      switch(*dataBuf & 0xc0){
+ 236   3                              case 0x00:
+ 237   3                                      len = STD_FRAMEID_LENTH + dlc;
+ 238   3                                      break;
+ 239   3                              case 0x40:
+C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/04/2018 14:49:52 PAGE 5   
+
+ 240   3                                      len = STD_FRAMEID_LENTH;
+ 241   3                                      break;
+ 242   3                              case 0x80:
+ 243   3                                      len = EXT_FRAMEID_LENTH + dlc;
+ 244   3                                      break;
+ 245   3                              case 0xc0:
+ 246   3                                      len = EXT_FRAMEID_LENTH;
+ 247   3                                      break;
+ 248   3                              default:
+ 249   3                                      len = 0;
+ 250   3                                      break;
+ 251   3                      }
+ 252   2                      if(len){
+ 253   3                              ReadSJARegBlock(REG_CAN_RXBUF1, dataBuf + 1, len);
+ 254   3                              status = SetBitMask(REG_CAN_CMR, RRB_BIT);
+ 255   3                      }
+ 256   2              }
+ 257   1              return status;
+ 258   1      }
+ 259          
+ 260          /*************************************************************
+ 261           * 函数名称：SJAConfigFilter
+ 262           * 函数功能：配置SJA的滤波器模式和滤波参数
+ 263           * 输入参数：mode 滤波器模式选择 >0:单滤波模式 其余:双滤波模式
+ 264           *                       filter 滤波器参数指针
+ 265           * 输出参数：无
+ 266           * 返回值：  无
+ 267          **************************************************************/
+ 268          void SJAConfigFilter(unsigned char mode, unsigned char *filter)
+ 269          {
+ 270   1              SetBitMask(REG_CAN_MODE, RM_RR_BIT);            //进入复位模式
+ 271   1              if(mode){
+ 272   2                      SetBitMask(REG_CAN_MODE, AFM_BIT);              //单滤波模式
+ 273   2              }else{
+ 274   2                      ClearBitMask(REG_CAN_MODE, AFM_BIT);    //双滤波模式
+ 275   2              }
+ 276   1              WriteSJARegBlock(REG_CAN_ACR0, filter, 8);      //配置验收代码寄存器/屏蔽寄存器
+ 277   1              ClearBitMask(REG_CAN_MODE, RM_RR_BIT);          //退出复位模式，进入工作模式
+ 278   1      }
+ 279          
+ 280          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    649    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      3    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      29
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
