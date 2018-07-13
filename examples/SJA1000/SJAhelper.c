@@ -293,7 +293,8 @@ unsigned char SJARcvData(unsigned char *dataBuf)
 		}
 		if(len){
 			ReadSJARegBlock(REG_CAN_RXBUF1, dataBuf + 1, len);
-			status = SetBitMask(REG_CAN_CMR, RRB_BIT);
+			SetBitMask(REG_CAN_CMR, RRB_BIT);
+			status = 1;
 		}
 	}
 	return status;

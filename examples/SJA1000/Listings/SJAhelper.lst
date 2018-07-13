@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/13/2018 18:06:39 PAGE 1   
+C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/13/2018 22:29:18 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE SJAHELPER
@@ -62,7 +62,7 @@ line level    source
   51           * 函数功能：将指定寄存器的指定位清零
   52           * 输入参数：regAdr 寄存器地址
   53          *                        bitValue 设置的位值(bitValue中为1的位，对应的位被清零)
-C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/13/2018 18:06:39 PAGE 2   
+C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/13/2018 22:29:18 PAGE 2   
 
   54           * 输出参数：无
   55           * 返回值：  1=操作成功，0=操作失败
@@ -126,7 +126,7 @@ line level    source
  113          //unsigned char SJAConnectTest(void)
  114          //{
  115          //      unsigned char status;
-C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/13/2018 18:06:39 PAGE 3   
+C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/13/2018 22:29:18 PAGE 3   
 
  116          //      WriteSJAReg(REG_CAN_TEST, 0x55);
  117          //      status = ReadSJAReg(REG_CAN_TEST) == 0x55 ? 1 : 0;
@@ -190,7 +190,7 @@ line level    source
  174   1              WriteSJAReg(REG_CAN_OCR, 0x1A);                         //配置输出引脚为TX0和RX0，推挽模式，正常输出
  175   1              
  176   1              while(!SetBitMask(REG_CAN_MODE, STM_BIT));      //进入只检测模式
-C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/13/2018 18:06:39 PAGE 4   
+C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/13/2018 22:29:18 PAGE 4   
 
  177   1              while(!ClearBitMask(REG_CAN_MODE, RM_RR_BIT));  //清除复位模式
  178   1              
@@ -254,7 +254,7 @@ line level    source
  236   3                              case 0x40:                                                                      //标准远程帧
  237   3                                      len = STD_FRAMEID_LENTH + 1;
  238   3                                      break;
-C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/13/2018 18:06:39 PAGE 5   
+C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/13/2018 22:29:18 PAGE 5   
 
  239   3                              case 0x80:                                                                      //扩展数据帧
  240   3                                      len = EXT_FRAMEID_LENTH + dlc + 1;
@@ -313,35 +313,36 @@ line level    source
  293   3                      }
  294   2                      if(len){
  295   3                              ReadSJARegBlock(REG_CAN_RXBUF1, dataBuf + 1, len);
- 296   3                              status = SetBitMask(REG_CAN_CMR, RRB_BIT);
- 297   3                      }
- 298   2              }
- 299   1              return status;
- 300   1      }
-C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/13/2018 18:06:39 PAGE 6   
+ 296   3                              SetBitMask(REG_CAN_CMR, RRB_BIT);
+ 297   3                              status = 1;
+ 298   3                      }
+ 299   2              }
+ 300   1              return status;
+C51 COMPILER V9.57.0.0   SJAHELPER                                                         07/13/2018 22:29:18 PAGE 6   
 
- 301          
- 302          /*************************************************************
- 303           * 函数名称：SJAConfigFilter
- 304           * 函数功能：配置SJA的滤波器模式和滤波参数
- 305           * 输入参数：mode 滤波器模式选择 >0:单滤波模式 其余:双滤波模式
- 306           *                       filter 滤波器参数指针
- 307           * 输出参数：无
- 308           * 返回值：  无
- 309          **************************************************************/
- 310          void SJAConfigFilter(unsigned char mode, unsigned char *filter)
- 311          {
- 312   1              SetBitMask(REG_CAN_MODE, RM_RR_BIT);            //进入复位模式
- 313   1              if(mode){
- 314   2                      SetBitMask(REG_CAN_MODE, AFM_BIT);              //单滤波模式
- 315   2              }else{
- 316   2                      ClearBitMask(REG_CAN_MODE, AFM_BIT);    //双滤波模式
- 317   2              }
- 318   1              WriteSJARegBlock(REG_CAN_ACR0, filter, 8);      //配置验收代码寄存器/屏蔽寄存器
- 319   1              ClearBitMask(REG_CAN_MODE, RM_RR_BIT);          //退出复位模式，进入工作模式
- 320   1      }
- 321          
+ 301   1      }
+ 302          
+ 303          /*************************************************************
+ 304           * 函数名称：SJAConfigFilter
+ 305           * 函数功能：配置SJA的滤波器模式和滤波参数
+ 306           * 输入参数：mode 滤波器模式选择 >0:单滤波模式 其余:双滤波模式
+ 307           *                       filter 滤波器参数指针
+ 308           * 输出参数：无
+ 309           * 返回值：  无
+ 310          **************************************************************/
+ 311          void SJAConfigFilter(unsigned char mode, unsigned char *filter)
+ 312          {
+ 313   1              SetBitMask(REG_CAN_MODE, RM_RR_BIT);            //进入复位模式
+ 314   1              if(mode){
+ 315   2                      SetBitMask(REG_CAN_MODE, AFM_BIT);              //单滤波模式
+ 316   2              }else{
+ 317   2                      ClearBitMask(REG_CAN_MODE, AFM_BIT);    //双滤波模式
+ 318   2              }
+ 319   1              WriteSJARegBlock(REG_CAN_ACR0, filter, 8);      //配置验收代码寄存器/屏蔽寄存器
+ 320   1              ClearBitMask(REG_CAN_MODE, RM_RR_BIT);          //退出复位模式，进入工作模式
+ 321   1      }
  322          
+ 323          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

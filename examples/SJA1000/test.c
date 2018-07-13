@@ -12,46 +12,46 @@ unsigned char SJA_CAN_Filter2[] = {
 	0x00, 0x00, 0x00, 0x03				//AMR0~AMR3
 };
 /*************************************************************/
-void TestSJAConnect(void);
-void TestSerialPort(void);
-void TsetSJASendRcv(void);
+//void TestSJAConnect(void);
+//void TestSerialPort(void);
+//void TsetSJASendRcv(void);
 void TestSJASend(void);
 void TestSJARcv(void);
-void TestSJAFilter(void);
+//void TestSJAFilter(void);
 void PrintData(unsigned char *buf, unsigned char len);
 /*************************************************************/
 void main(void)
 {
-	TestSJASend();
+	TestSJARcv();
 }
 /*************************************************************/
 /* 串口输出测试 */
-void TestSerialPort(void)
-{
-	Timer0Init();
-	SerialPortInit();
-	while(1){
-		printf("serial port test!~\n");
-		Timer0Delay(100);
-	}
-}
+//void TestSerialPort(void)
+//{
+//	Timer0Init();
+//	SerialPortInit();
+//	while(1){
+//		printf("serial port test!~\n");
+//		Timer0Delay(100);
+//	}
+//}
 
 /* 硬件连接测试 */
-void TestSJAConnect(void)
-{
-	unsigned char write_data, read_data;
-	Timer0Init();
-	SerialPortInit();
-	while(1){
-		for(write_data = 0; write_data < 100; write_data++){
-			printf("\n**************************************************************\n");
-			WriteSJAReg(0x09, write_data);
-			read_data = ReadSJAReg(0x09);
-			printf("write data: %bu,\t read data: %bu\n", write_data, read_data);
-			Timer0Delay(100);
-		}
-	}
-}
+//void TestSJAConnect(void)
+//{
+//	unsigned char write_data, read_data;
+//	Timer0Init();
+//	SerialPortInit();
+//	while(1){
+//		for(write_data = 0; write_data < 100; write_data++){
+//			printf("\n**************************************************************\n");
+//			WriteSJAReg(0x09, write_data);
+//			read_data = ReadSJAReg(0x09);
+//			printf("write data: %bu,\t read data: %bu\n", write_data, read_data);
+//			Timer0Delay(100);
+//		}
+//	}
+//}
 
 /* SJA1000自收发测试 */
 //void TsetSJASendRcv(void)
@@ -169,38 +169,33 @@ void TestSJASend(void)
 	}
 }
 
-//void TestSJARcv(void)
-//{
-//	Timer0Init();
-//	SJA_RST = 1;
-//	Timer0Delay(50);
-//	SJA_RST = 0;
-//	SJAInit(0x00, 0x14, SJA_CAN_Filter);
-//	for(;;){
-//		if(SJARcvData(SJA_RCV_BUFFER)){
-//			D1 = !D1;
-//			Timer0Delay(100);
-//		}else{
-//			D1 = !D1;
-//			Timer0Delay(10);
-//		}
-//	}
-//}
-
-//void TestSJAFilter(void)
-//{
-//	Timer0Init();
-//	SJA_RST = 1;
-//	Timer0Delay(50);
-//	SJA_RST = 0;
-//	SJAInit(0x00, 0x14, SJA_CAN_Filter);
-//	SJAConfigFilter(1, SJA_CAN_Filter2);
-//	for(;;){
-//		if(SJARcvData(SJA_RCV_BUFFER)){
-//			D1 = !D1;
-//		}
-//	}
-//}
+void TestSJARcv(void){
+	unsigned char SJA_RCV_BUFFER_FUNC[13], status;
+	/* 验收滤波器的参数，接收所有帧 */
+	unsigned char SJA_CAN_Filter[] = {
+		0x00, 0x00, 0x00, 0x00,				//ACR0~ACR3
+		0xff, 0xff, 0xff, 0xff				//AMR0~AMR3
+	};
+	/* init */
+	Timer0Init();
+	SerialPortInit();
+	/* reset and init SJA1000 */
+	SJA_RST = 0;
+	Timer0Delay(50);
+	SJA_RST = 1;
+	SJAInit(0x08, 0x00, 0x14, SJA_CAN_Filter);	//正常工作 单滤波 波特率1mbps 接收所有帧
+	
+	while(1){
+		printf("\n**************************************************************\n");
+		if(SJARcvData(SJA_RCV_BUFFER_FUNC)){
+			printf("sja rcv data success: ");
+			PrintData(SJA_RCV_BUFFER_FUNC, 13);
+		}else{
+			printf("sja rcv data failed\n");
+		}
+		Timer0Delay(100);
+	}
+}
 
 void PrintData(unsigned char *buf, unsigned char len)
 {
