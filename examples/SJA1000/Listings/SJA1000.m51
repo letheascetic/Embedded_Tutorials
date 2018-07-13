@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    07/04/2018  14:49:53  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    07/13/2018  18:06:40  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -15,10 +15,15 @@ INPUT MODULES INCLUDED:
   .\Objects\util.obj (UTIL)
   .\Objects\test.obj (TEST)
   D:\KEIL\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+  D:\KEIL\KEIL_V5\C51\LIB\C51S.LIB (?C?COPY)
   D:\KEIL\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
   D:\KEIL\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDOPTR)
   D:\KEIL\KEIL_V5\C51\LIB\C51S.LIB (?C?CSTPTR)
   D:\KEIL\KEIL_V5\C51\LIB\C51S.LIB (?C?CSTOPTR)
+  D:\KEIL\KEIL_V5\C51\LIB\C51S.LIB (PRINTF)
+  D:\KEIL\KEIL_V5\C51\LIB\C51S.LIB (?C?PLDIIDATA)
+  D:\KEIL\KEIL_V5\C51\LIB\C51S.LIB (?C?CCASE)
+  D:\KEIL\KEIL_V5\C51\LIB\C51S.LIB (PUTCHAR)
 
 
 LINK MAP OF MODULE:  .\Objects\SJA1000 (?C_STARTUP)
@@ -29,105 +34,123 @@ LINK MAP OF MODULE:  .\Objects\SJA1000 (?C_STARTUP)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            DATA    0008H     0028H     UNIT         ?DT?TEST
-            DATA    0030H     000AH     UNIT         _DATA_GROUP_
-            DATA    003AH     0005H     UNIT         ?DT?_READSJAREGBLOCK?SJAHELPER
-            DATA    003FH     0004H     UNIT         ?DT?_SJARCVDATA?SJAHELPER
-            DATA    0043H     0004H     UNIT         ?DT?_SJACONFIGFILTER?SJAHELPER
-            IDATA   0047H     0001H     UNIT         ?STACK
-
-            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
-            XDATA   0000H     0003H     UNIT         ?XD?SJAHELPER
+            DATA    0008H     0008H     UNIT         ?DT?TEST
+            DATA    0010H     0005H     UNIT         ?DT?_READSJAREGBLOCK?SJAHELPER
+            DATA    0015H     0005H     UNIT         ?DT?_SJASTDINIT?SJAHELPER
+            DATA    001AH     0004H     UNIT         ?DT?_SJARCVDATA?SJAHELPER
+            DATA    001EH     0002H     UNIT         ?DT?SJAHELPER
+            BIT     0020H.0   0001H.1   UNIT         _BIT_GROUP_
+                    0021H.1   0000H.7                *** GAP ***
+            DATA    0022H     002FH     UNIT         _DATA_GROUP_
+            DATA    0051H     0004H     UNIT         ?DT?_SJACONFIGFILTER?SJAHELPER
+            DATA    0055H     0002H     UNIT         ?DT?TESTSJACONNECT?TEST
+            IDATA   0057H     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
                     0003H     07FDH                  *** GAP ***
-            CODE    0800H     008DH     UNIT         ?PR?_SJARCVDATA?SJAHELPER
-            CODE    088DH     008CH     UNIT         ?C_C51STARTUP
-            CODE    0919H     007CH     UNIT         ?PR?_SJASENDDATA?SJAHELPER
-            CODE    0995H     007AH     UNIT         ?C?LIB_CODE
-            CODE    0A0FH     0047H     UNIT         ?PR?_SJAINIT?SJAHELPER
-            CODE    0A56H     003FH     UNIT         ?PR?TESTSJASEND?TEST
-            CODE    0A95H     003DH     UNIT         ?PR?TESTSJARCV?TEST
-            CODE    0AD2H     0036H     UNIT         ?PR?_WRITESJAREGBLOCK?SJAHELPER
-            CODE    0B08H     0036H     UNIT         ?PR?_READSJAREGBLOCK?SJAHELPER
-            CODE    0B3EH     0036H     UNIT         ?PR?_SJACONFIGFILTER?SJAHELPER
-            CODE    0B74H     0036H     UNIT         ?PR?TESTSJAFILTER?TEST
-            CODE    0BAAH     0028H     UNIT         ?C_INITSEG
-            CODE    0BD2H     0025H     UNIT         ?PR?_SETSJASENDCMD?SJAHELPER
-            CODE    0BF7H     0021H     UNIT         ?PR?TESTSJACONNECT?TEST
-            CODE    0C18H     001CH     UNIT         ?PR?_READSJAREG?SJAHELPER
-            CODE    0C34H     0019H     UNIT         ?PR?_TIMER0DELAY?UTIL
-            CODE    0C4DH     0018H     UNIT         ?PR?_CLEARBITMASK?SJAHELPER
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/04/2018  14:49:53  PAGE 2
+            CODE    0800H     035CH     UNIT         ?PR?PRINTF?PRINTF
+            CODE    0B5CH     01A6H     UNIT         ?C?LIB_CODE
+            CODE    0D02H     013BH     UNIT         ?CO?TEST
+            CODE    0E3DH     00E1H     UNIT         ?PR?TESTSJASEND?TEST
+            CODE    0F1EH     008DH     UNIT         ?PR?_SJARCVDATA?SJAHELPER
+            CODE    0FABH     008CH     UNIT         ?C_C51STARTUP
+            CODE    1037H     007CH     UNIT         ?PR?_SJASENDDATA?SJAHELPER
+            CODE    10B3H     0059H     UNIT         ?PR?_SJASTDINIT?SJAHELPER
+            CODE    110CH     0047H     UNIT         ?PR?_PRINTDATA?TEST
+            CODE    1153H     0041H     UNIT         ?PR?TESTSJACONNECT?TEST
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/13/2018  18:06:40  PAGE 2
 
 
-            CODE    0C65H     0017H     UNIT         ?PR?_SETBITMASK?SJAHELPER
-            CODE    0C7CH     0014H     UNIT         ?PR?_WRITESJAREG?SJAHELPER
-            CODE    0C90H     0013H     UNIT         ?PR?SJACONNECTTEST?SJAHELPER
-            CODE    0CA3H     0007H     UNIT         ?PR?TIMER0INIT?UTIL
-            CODE    0CAAH     0003H     UNIT         ?PR?MAIN?TEST
+            CODE    1194H     003BH     UNIT         ?PR?_WRITESJAREGBLOCK?SJAHELPER
+            CODE    11CFH     0036H     UNIT         ?PR?_READSJAREGBLOCK?SJAHELPER
+            CODE    1205H     0033H     UNIT         ?PR?_SJAINIT?SJAHELPER
+            CODE    1238H     002DH     UNIT         ?PR?_SJACONFIGFILTER?SJAHELPER
+            CODE    1265H     0027H     UNIT         ?PR?PUTCHAR?PUTCHAR
+            CODE    128CH     0025H     UNIT         ?PR?_SETSJASENDCMD?SJAHELPER
+            CODE    12B1H     001DH     UNIT         ?PR?_SETBITMASK?SJAHELPER
+            CODE    12CEH     001AH     UNIT         ?PR?_CLEARBITMASK?SJAHELPER
+            CODE    12E8H     0019H     UNIT         ?PR?_TIMER0DELAY?UTIL
+            CODE    1301H     0018H     UNIT         ?PR?SERIALPORTINIT?UTIL
+            CODE    1319H     0018H     UNIT         ?PR?TESTSERIALPORT?TEST
+            CODE    1331H     0014H     UNIT         ?PR?_WRITESJAREG?SJAHELPER
+            CODE    1345H     0014H     UNIT         ?PR?_READSJAREG?SJAHELPER
+            CODE    1359H     000FH     UNIT         ?C_INITSEG
+            CODE    1368H     0007H     UNIT         ?PR?TIMER0INIT?UTIL
+            CODE    136FH     0003H     UNIT         ?PR?MAIN?TEST
 
 
 
 OVERLAY MAP OF MODULE:   .\Objects\SJA1000 (?C_STARTUP)
 
 
-SEGMENT                                   DATA_GROUP 
-  +--> CALLED SEGMENT                   START    LENGTH
--------------------------------------------------------
-?C_C51STARTUP                           -----    -----
+SEGMENT                                    BIT_GROUP          DATA_GROUP 
+  +--> CALLED SEGMENT                   START    LENGTH     START    LENGTH
+---------------------------------------------------------------------------
+?C_C51STARTUP                           -----    -----      -----    -----
   +--> ?PR?MAIN?TEST
   +--> ?C_INITSEG
 
-?PR?MAIN?TEST                           -----    -----
+?PR?MAIN?TEST                           -----    -----      -----    -----
   +--> ?PR?TESTSJASEND?TEST
 
-?PR?TESTSJASEND?TEST                    -----    -----
+?PR?TESTSJASEND?TEST                    -----    -----      0022H    0015H
+  +--> ?CO?TEST
   +--> ?PR?TIMER0INIT?UTIL
+  +--> ?PR?SERIALPORTINIT?UTIL
   +--> ?PR?_TIMER0DELAY?UTIL
   +--> ?PR?_SJAINIT?SJAHELPER
+  +--> ?PR?PRINTF?PRINTF
   +--> ?PR?_SJASENDDATA?SJAHELPER
+  +--> ?PR?_PRINTDATA?TEST
+  +--> ?PR?_READSJAREG?SJAHELPER
 
-?PR?_SJAINIT?SJAHELPER                  0030H    0005H
+?PR?_SJAINIT?SJAHELPER                  -----    -----      0037H    0006H
   +--> ?PR?_SETBITMASK?SJAHELPER
   +--> ?PR?_WRITESJAREG?SJAHELPER
   +--> ?PR?_WRITESJAREGBLOCK?SJAHELPER
   +--> ?PR?_CLEARBITMASK?SJAHELPER
 
-?PR?_SETBITMASK?SJAHELPER               -----    -----
+?PR?_SETBITMASK?SJAHELPER               -----    -----      -----    -----
   +--> ?PR?_READSJAREG?SJAHELPER
 
-?PR?_READSJAREG?SJAHELPER               -----    -----
+?PR?_READSJAREG?SJAHELPER               -----    -----      -----    -----
   +--> ?PR?_WRITESJAREG?SJAHELPER
 
-?PR?_WRITESJAREGBLOCK?SJAHELPER         0035H    0005H
+?PR?_WRITESJAREGBLOCK?SJAHELPER         -----    -----      003DH    0005H
   +--> ?PR?_WRITESJAREG?SJAHELPER
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/13/2018  18:06:40  PAGE 3
 
-?PR?_CLEARBITMASK?SJAHELPER             -----    -----
+
+
+?PR?_CLEARBITMASK?SJAHELPER             -----    -----      -----    -----
   +--> ?PR?_READSJAREG?SJAHELPER
 
-?PR?_SJASENDDATA?SJAHELPER              0030H    0005H
+?PR?PRINTF?PRINTF                       0020H.0  0001H.1    003DH    0014H
+  +--> ?PR?PUTCHAR?PUTCHAR
+
+?PR?_SJASENDDATA?SJAHELPER              -----    -----      0037H    0005H
   +--> ?PR?_READSJAREG?SJAHELPER
   +--> ?PR?_WRITESJAREGBLOCK?SJAHELPER
   +--> ?PR?_SETSJASENDCMD?SJAHELPER
 
-?PR?_SETSJASENDCMD?SJAHELPER            0035H    0001H
+?PR?_SETSJASENDCMD?SJAHELPER            -----    -----      003CH    0001H
   +--> ?PR?_SETBITMASK?SJAHELPER
+
+?PR?_PRINTDATA?TEST                     -----    -----      0037H    0006H
+  +--> ?CO?TEST
+  +--> ?PR?PRINTF?PRINTF
 
 
 
 SYMBOL TABLE OF MODULE:  .\Objects\SJA1000 (?C_STARTUP)
 
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/04/2018  14:49:53  PAGE 3
-
-
   VALUE           TYPE          NAME
   ----------------------------------
 
   -------         MODULE        ?C_STARTUP
-  C:088DH         SEGMENT       ?C_C51STARTUP
-  I:0047H         SEGMENT       ?STACK
+  C:0FABH         SEGMENT       ?C_C51STARTUP
+  I:0057H         SEGMENT       ?STACK
   C:0000H         PUBLIC        ?C_STARTUP
   D:00E0H         SYMBOL        ACC
   D:00F0H         SYMBOL        B
@@ -136,7 +159,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\SJA1000 (?C_STARTUP)
   N:0000H         SYMBOL        IBPSTACK
   N:0100H         SYMBOL        IBPSTACKTOP
   N:0080H         SYMBOL        IDATALEN
-  C:0890H         SYMBOL        IDATALOOP
+  C:0FAEH         SYMBOL        IDATALOOP
   N:0000H         SYMBOL        PBPSTACK
   N:0100H         SYMBOL        PBPSTACKTOP
   N:0000H         SYMBOL        PDATALEN
@@ -145,450 +168,560 @@ SYMBOL TABLE OF MODULE:  .\Objects\SJA1000 (?C_STARTUP)
   N:0000H         SYMBOL        PPAGEENABLE
   D:00A0H         SYMBOL        PPAGE_SFR
   D:0081H         SYMBOL        SP
-  C:088DH         SYMBOL        STARTUP1
+  C:0FABH         SYMBOL        STARTUP1
   N:0000H         SYMBOL        XBPSTACK
   N:0000H         SYMBOL        XBPSTACKTOP
   N:0000H         SYMBOL        XDATALEN
   N:0000H         SYMBOL        XDATASTART
   C:0000H         LINE#         126
-  C:088DH         LINE#         133
-  C:088FH         LINE#         134
-  C:0890H         LINE#         135
-  C:0891H         LINE#         136
-  C:0893H         LINE#         185
-  C:0896H         LINE#         196
+  C:0FABH         LINE#         133
+  C:0FADH         LINE#         134
+  C:0FAEH         LINE#         135
+  C:0FAFH         LINE#         136
+  C:0FB1H         LINE#         185
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/13/2018  18:06:40  PAGE 4
+
+
+  C:0FB4H         LINE#         196
   -------         ENDMOD        ?C_STARTUP
 
   -------         MODULE        SJAHELPER
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0800H         PUBLIC        _SJARcvData
-  C:0C7CH         PUBLIC        _WriteSJAReg
-  C:0C4DH         PUBLIC        _ClearBitMask
-  C:0B3EH         PUBLIC        _SJAConfigFilter
-  C:0BD2H         PUBLIC        _SetSJASendCmd
-  X:0000H         PUBLIC        SJA_CS_Point
-  C:0C90H         PUBLIC        SJAConnectTest
-  C:0C65H         PUBLIC        _SetBitMask
-  C:0919H         PUBLIC        _SJASendData
-  C:0B08H         PUBLIC        _ReadSJARegBlock
-  C:0A0FH         PUBLIC        _SJAInit
-  C:0AD2H         PUBLIC        _WriteSJARegBlock
-  C:0C1FH         PUBLIC        _ReadSJAReg
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  C:0F1EH         PUBLIC        _SJARcvData
+  D:00A8H         PUBLIC        IE
+  C:1338H         PUBLIC        _WriteSJAReg
+  B:00A0H.7       PUBLIC        CS
+  D:00B8H         PUBLIC        IP
+  C:12CEH         PUBLIC        _ClearBitMask
+  C:10B3H         PUBLIC        _SJAStdInit
+  C:1238H         PUBLIC        _SJAConfigFilter
+  C:128CH         PUBLIC        _SetSJASendCmd
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:001EH         PUBLIC        SJA_CS_Point
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  B:00B8H.0       PUBLIC        PX0
+  C:12B5H         PUBLIC        _SetBitMask
+  D:00C8H         PUBLIC        T2CON
+  C:1037H         PUBLIC        _SJASendData
+  C:11CFH         PUBLIC        _ReadSJARegBlock
+  C:1205H         PUBLIC        _SJAInit
+  D:00D0H         PUBLIC        PSW
+  C:1199H         PUBLIC        _WriteSJARegBlock
+  C:134CH         PUBLIC        _ReadSJAReg
+  -------         PROC          L?0071
+  -------         ENDPROC       L?0071
   -------         PROC          _WRITESJAREG
   D:0007H         SYMBOL        regAdr
   D:0005H         SYMBOL        value
-  C:0C7CH         LINE#         13
-  C:0C7CH         LINE#         14
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/04/2018  14:49:53  PAGE 4
-
-
-  C:0C7CH         LINE#         15
+  C:1338H         LINE#         15
+  C:1338H         LINE#         16
+  C:1338H         LINE#         17
+  C:1344H         LINE#         18
   -------         ENDPROC       _WRITESJAREG
-  -------         PROC          L?0062
-  -------         ENDPROC       L?0062
+  -------         PROC          L?0070
+  -------         ENDPROC       L?0070
   -------         PROC          _READSJAREG
   D:0007H         SYMBOL        regAdr
-  C:0C1FH         LINE#         21
-  C:0C1FH         LINE#         22
-  C:0C1FH         LINE#         23
-  C:0C33H         LINE#         24
+  C:134CH         LINE#         23
+  C:134CH         LINE#         24
+  C:134CH         LINE#         25
+  C:1358H         LINE#         26
   -------         ENDPROC       _READSJAREG
+  C:12B1H         SYMBOL        L?0067
+  -------         PROC          L?0066
+  -------         ENDPROC       L?0066
+  C:12B1H         SYMBOL        L?0067
   -------         PROC          _SETBITMASK
-  D:0004H         SYMBOL        regAdr
-  D:0005H         SYMBOL        bitValue
+  D:0006H         SYMBOL        regAdr
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/13/2018  18:06:40  PAGE 5
+
+
+  D:0004H         SYMBOL        bitValue
   -------         DO            
   D:0007H         SYMBOL        status
-  D:0006H         SYMBOL        value
+  D:0003H         SYMBOL        value
   -------         ENDDO         
-  C:0C65H         LINE#         34
-  C:0C67H         LINE#         35
-  C:0C67H         LINE#         39
-  C:0C6CH         LINE#         40
-  C:0C6FH         LINE#         41
-  C:0C6FH         LINE#         43
-  C:0C7BH         LINE#         44
-  C:0C7BH         LINE#         45
+  C:12B5H         LINE#         36
+  C:12B9H         LINE#         37
+  C:12B9H         LINE#         41
+  C:12BEH         LINE#         42
+  C:12C1H         LINE#         43
+  C:12C1H         LINE#         45
+  C:12CDH         LINE#         46
+  C:12CDH         LINE#         47
   -------         ENDPROC       _SETBITMASK
   -------         PROC          _CLEARBITMASK
-  D:0004H         SYMBOL        regAdr
-  D:0005H         SYMBOL        bitValue
+  D:0006H         SYMBOL        regAdr
+  D:0004H         SYMBOL        bitValue
   -------         DO            
   D:0007H         SYMBOL        status
-  D:0006H         SYMBOL        value
+  D:0003H         SYMBOL        value
   -------         ENDDO         
-  C:0C4DH         LINE#         55
-  C:0C4FH         LINE#         56
-  C:0C4FH         LINE#         60
-  C:0C54H         LINE#         61
-  C:0C58H         LINE#         62
-  C:0C58H         LINE#         64
-  C:0C64H         LINE#         65
-  C:0C64H         LINE#         66
+  C:12CEH         LINE#         57
+  C:12D2H         LINE#         58
+  C:12D2H         LINE#         62
+  C:12D7H         LINE#         63
+  C:12DBH         LINE#         64
+  C:12DBH         LINE#         66
+  C:12E7H         LINE#         67
+  C:12E7H         LINE#         68
   -------         ENDPROC       _CLEARBITMASK
+  C:1194H         SYMBOL        L?0069
+  -------         PROC          L?0068
+  -------         ENDPROC       L?0068
+  C:1194H         SYMBOL        L?0069
   -------         PROC          _WRITESJAREGBLOCK
   D:0006H         SYMBOL        regAdr
-  D:0036H         SYMBOL        valueBuf
-  D:0039H         SYMBOL        len
+  D:003EH         SYMBOL        valueBuf
+  D:0041H         SYMBOL        len
   -------         DO            
   D:0004H         SYMBOL        i
   -------         ENDDO         
-  C:0AD2H         LINE#         77
-  C:0ADAH         LINE#         78
-  C:0ADAH         LINE#         80
-  C:0AE2H         LINE#         81
-  C:0AF7H         LINE#         82
-  C:0AFAH         LINE#         83
-  C:0B07H         LINE#         84
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/04/2018  14:49:53  PAGE 5
-
-
+  C:1199H         LINE#         79
+  C:11A1H         LINE#         80
+  C:11A1H         LINE#         82
+  C:11A9H         LINE#         83
+  C:11BEH         LINE#         84
+  C:11C1H         LINE#         85
+  C:11CEH         LINE#         86
   -------         ENDPROC       _WRITESJAREGBLOCK
   -------         PROC          _READSJAREGBLOCK
   D:0006H         SYMBOL        regAdr
-  D:003BH         SYMBOL        valueBuf
-  D:003EH         SYMBOL        len
+  D:0011H         SYMBOL        valueBuf
+  D:0014H         SYMBOL        len
   -------         DO            
   D:0005H         SYMBOL        i
   -------         ENDDO         
-  C:0B08H         LINE#         95
-  C:0B10H         LINE#         96
-  C:0B10H         LINE#         98
-  C:0B18H         LINE#         99
-  C:0B2DH         LINE#         100
-  C:0B30H         LINE#         101
-  C:0B3DH         LINE#         102
+  C:11CFH         LINE#         97
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/13/2018  18:06:40  PAGE 6
+
+
+  C:11D7H         LINE#         98
+  C:11D7H         LINE#         100
+  C:11DFH         LINE#         101
+  C:11F4H         LINE#         102
+  C:11F7H         LINE#         103
+  C:1204H         LINE#         104
   -------         ENDPROC       _READSJAREGBLOCK
-  -------         PROC          SJACONNECTTEST
-  -------         DO            
-  D:0007H         SYMBOL        status
-  -------         ENDDO         
-  C:0C90H         LINE#         111
-  C:0C90H         LINE#         112
-  C:0C90H         LINE#         114
-  C:0C97H         LINE#         115
-  C:0CA2H         LINE#         116
-  C:0CA2H         LINE#         117
-  -------         ENDPROC       SJACONNECTTEST
   -------         PROC          _SJAINIT
-  D:0030H         SYMBOL        btr0
-  D:0031H         SYMBOL        btr1
-  D:0032H         SYMBOL        filter
-  C:0A0FH         LINE#         128
-  C:0A19H         LINE#         129
-  C:0A19H         LINE#         130
-  C:0A20H         LINE#         131
-  C:0A27H         LINE#         133
-  C:0A2EH         LINE#         134
-  C:0A3CH         LINE#         135
-  C:0A43H         LINE#         136
-  C:0A49H         LINE#         137
-  C:0A4FH         LINE#         138
+  D:0037H         SYMBOL        mode
+  D:0038H         SYMBOL        btr0
+  D:0039H         SYMBOL        btr1
+  D:003AH         SYMBOL        filter
+  C:1205H         LINE#         130
+  C:120BH         LINE#         131
+  C:120BH         LINE#         132
+  C:120EH         LINE#         133
+  C:1215H         LINE#         136
+  C:121EH         LINE#         137
+  C:1225H         LINE#         138
+  C:1227H         LINE#         139
+  C:122AH         LINE#         141
+  C:1231H         LINE#         142
   -------         ENDPROC       _SJAINIT
+  -------         PROC          _SJASTDINIT
+  D:0015H         SYMBOL        btr0
+  D:0016H         SYMBOL        btr1
+  D:0017H         SYMBOL        filter
+  C:10B3H         LINE#         154
+  C:10BDH         LINE#         155
+  C:10BDH         LINE#         157
+  C:10BFH         LINE#         158
+  C:10C1H         LINE#         160
+  C:10C3H         LINE#         162
+  C:10C5H         LINE#         163
+  C:10C7H         LINE#         165
+  C:10CAH         LINE#         166
+  C:10D0H         LINE#         168
+  C:10D7H         LINE#         170
+  C:10DEH         LINE#         171
+  C:10E7H         LINE#         172
+  C:10EEH         LINE#         173
+  C:10F0H         LINE#         174
+  C:10F3H         LINE#         176
+  C:10FDH         LINE#         177
+  C:1107H         LINE#         179
+  C:1109H         LINE#         180
+  C:110BH         LINE#         181
+  -------         ENDPROC       _SJASTDINIT
   -------         PROC          _SETSJASENDCMD
   D:0007H         SYMBOL        cmd
   -------         DO            
-  D:0035H         SYMBOL        status
+  D:003CH         SYMBOL        status
   -------         ENDDO         
-  C:0BD2H         LINE#         148
-  C:0BD2H         LINE#         149
-  C:0BD2H         LINE#         151
-  C:0BDFH         LINE#         152
-  C:0BDFH         LINE#         153
-  C:0BDFH         LINE#         154
-  C:0BE1H         LINE#         155
-  C:0BE3H         LINE#         156
-  C:0BE3H         LINE#         157
-  C:0BE5H         LINE#         158
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/04/2018  14:49:53  PAGE 6
+  C:128CH         LINE#         190
+  C:128CH         LINE#         191
+  C:128CH         LINE#         193
+  C:1299H         LINE#         194
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/13/2018  18:06:40  PAGE 7
 
 
-  C:0BE7H         LINE#         159
-  C:0BE7H         LINE#         160
-  C:0BE9H         LINE#         161
-  C:0BEBH         LINE#         162
-  C:0BEBH         LINE#         163
-  C:0BF4H         LINE#         164
-  C:0BF4H         LINE#         165
-  C:0BF4H         LINE#         166
-  C:0BF6H         LINE#         167
+  C:1299H         LINE#         195
+  C:1299H         LINE#         196
+  C:129BH         LINE#         197
+  C:129DH         LINE#         198
+  C:129DH         LINE#         199
+  C:129FH         LINE#         200
+  C:12A1H         LINE#         201
+  C:12A1H         LINE#         202
+  C:12A3H         LINE#         203
+  C:12A5H         LINE#         204
+  C:12A5H         LINE#         205
+  C:12AEH         LINE#         206
+  C:12AEH         LINE#         207
+  C:12AEH         LINE#         208
+  C:12B0H         LINE#         209
   -------         ENDPROC       _SETSJASENDCMD
   -------         PROC          _SJASENDDATA
-  D:0030H         SYMBOL        dataBuf
-  D:0033H         SYMBOL        cmd
+  D:0037H         SYMBOL        dataBuf
+  D:003AH         SYMBOL        cmd
   -------         DO            
   D:0006H         SYMBOL        status
-  D:0034H         SYMBOL        len
+  D:003BH         SYMBOL        len
   D:0005H         SYMBOL        dlc
-  D:0007H         SYMBOL        sr
   -------         ENDDO         
-  C:0919H         LINE#         177
-  C:0921H         LINE#         178
-  C:0921H         LINE#         179
-  C:0923H         LINE#         183
-  C:0928H         LINE#         184
-  C:092FH         LINE#         185
-  C:092FH         LINE#         186
-  C:092FH         LINE#         187
-  C:0931H         LINE#         188
-  C:0931H         LINE#         189
-  C:093EH         LINE#         190
-  C:094BH         LINE#         191
-  C:095EH         LINE#         192
-  C:095EH         LINE#         193
-  C:0963H         LINE#         194
-  C:0965H         LINE#         195
-  C:0965H         LINE#         196
-  C:0968H         LINE#         197
-  C:096AH         LINE#         198
-  C:096AH         LINE#         199
-  C:096FH         LINE#         200
-  C:0971H         LINE#         201
-  C:0971H         LINE#         202
-  C:0974H         LINE#         203
-  C:0976H         LINE#         204
-  C:0976H         LINE#         205
-  C:0979H         LINE#         206
-  C:097AH         LINE#         207
-  C:097AH         LINE#         208
-  C:097AH         LINE#         209
-  C:097EH         LINE#         210
-  C:098BH         LINE#         211
-  C:0992H         LINE#         212
-  C:0992H         LINE#         213
-  C:0992H         LINE#         214
-  C:0994H         LINE#         215
+  C:1037H         LINE#         219
+  C:103FH         LINE#         220
+  C:103FH         LINE#         221
+  C:1041H         LINE#         224
+  C:104DH         LINE#         226
+  C:104DH         LINE#         227
+  C:104DH         LINE#         228
+  C:104FH         LINE#         229
+  C:104FH         LINE#         230
+  C:105CH         LINE#         231
+  C:1069H         LINE#         232
+  C:107CH         LINE#         233
+  C:107CH         LINE#         234
+  C:1081H         LINE#         235
+  C:1083H         LINE#         236
+  C:1083H         LINE#         237
+  C:1086H         LINE#         238
+  C:1088H         LINE#         239
+  C:1088H         LINE#         240
+  C:108DH         LINE#         241
+  C:108FH         LINE#         242
+  C:108FH         LINE#         243
+  C:1092H         LINE#         244
+  C:1094H         LINE#         245
+  C:1094H         LINE#         246
+  C:1097H         LINE#         247
+  C:1098H         LINE#         248
+  C:1098H         LINE#         249
+  C:1098H         LINE#         250
+  C:109CH         LINE#         251
+  C:10A9H         LINE#         252
+  C:10AEH         LINE#         253
+  C:10B0H         LINE#         254
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/13/2018  18:06:40  PAGE 8
+
+
+  C:10B0H         LINE#         255
+  C:10B0H         LINE#         256
+  C:10B2H         LINE#         257
   -------         ENDPROC       _SJASENDDATA
   -------         PROC          _SJARCVDATA
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/04/2018  14:49:53  PAGE 7
-
-
-  D:003FH         SYMBOL        dataBuf
+  D:001AH         SYMBOL        dataBuf
   -------         DO            
   D:0006H         SYMBOL        status
   D:0005H         SYMBOL        dlc
-  D:0042H         SYMBOL        len
+  D:001DH         SYMBOL        len
   -------         ENDDO         
-  C:0800H         LINE#         224
-  C:0806H         LINE#         225
-  C:0806H         LINE#         226
-  C:0808H         LINE#         228
-  C:0811H         LINE#         229
-  C:0811H         LINE#         230
-  C:0813H         LINE#         231
-  C:0822H         LINE#         232
-  C:082FH         LINE#         233
-  C:083CH         LINE#         235
-  C:084FH         LINE#         236
-  C:084FH         LINE#         237
-  C:0854H         LINE#         238
-  C:0856H         LINE#         239
-  C:0856H         LINE#         240
-  C:0859H         LINE#         241
-  C:085BH         LINE#         242
-  C:085BH         LINE#         243
-  C:0860H         LINE#         244
-  C:0862H         LINE#         245
-  C:0862H         LINE#         246
-  C:0865H         LINE#         247
-  C:0867H         LINE#         248
-  C:0867H         LINE#         249
-  C:086AH         LINE#         250
-  C:086AH         LINE#         251
-  C:086AH         LINE#         252
-  C:086EH         LINE#         253
-  C:0881H         LINE#         254
-  C:088AH         LINE#         255
-  C:088AH         LINE#         256
-  C:088AH         LINE#         257
-  C:088CH         LINE#         258
+  C:0F1EH         LINE#         266
+  C:0F24H         LINE#         267
+  C:0F24H         LINE#         268
+  C:0F26H         LINE#         270
+  C:0F2FH         LINE#         271
+  C:0F2FH         LINE#         272
+  C:0F31H         LINE#         273
+  C:0F40H         LINE#         274
+  C:0F4DH         LINE#         275
+  C:0F5AH         LINE#         277
+  C:0F6DH         LINE#         278
+  C:0F6DH         LINE#         279
+  C:0F72H         LINE#         280
+  C:0F74H         LINE#         281
+  C:0F74H         LINE#         282
+  C:0F77H         LINE#         283
+  C:0F79H         LINE#         284
+  C:0F79H         LINE#         285
+  C:0F7EH         LINE#         286
+  C:0F80H         LINE#         287
+  C:0F80H         LINE#         288
+  C:0F83H         LINE#         289
+  C:0F85H         LINE#         290
+  C:0F85H         LINE#         291
+  C:0F88H         LINE#         292
+  C:0F88H         LINE#         293
+  C:0F88H         LINE#         294
+  C:0F8CH         LINE#         295
+  C:0F9FH         LINE#         296
+  C:0FA8H         LINE#         297
+  C:0FA8H         LINE#         298
+  C:0FA8H         LINE#         299
+  C:0FAAH         LINE#         300
   -------         ENDPROC       _SJARCVDATA
   -------         PROC          _SJACONFIGFILTER
-  D:0043H         SYMBOL        mode
-  D:0044H         SYMBOL        filter
-  C:0B3EH         LINE#         268
-  C:0B46H         LINE#         269
-  C:0B46H         LINE#         270
-  C:0B4DH         LINE#         271
-  C:0B53H         LINE#         272
-  C:0B58H         LINE#         273
-  C:0B5AH         LINE#         274
-  C:0B5FH         LINE#         275
-  C:0B5FH         LINE#         276
-  C:0B6DH         LINE#         277
+  D:0051H         SYMBOL        mode
+  D:0052H         SYMBOL        filter
+  C:1238H         LINE#         310
+  C:1240H         LINE#         311
+  C:1240H         LINE#         312
+  C:1243H         LINE#         313
+  C:1249H         LINE#         314
+  C:124EH         LINE#         315
+  C:1250H         LINE#         316
+  C:1255H         LINE#         317
+  C:1255H         LINE#         318
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/13/2018  18:06:40  PAGE 9
+
+
+  C:125EH         LINE#         319
   -------         ENDPROC       _SJACONFIGFILTER
   -------         ENDMOD        SJAHELPER
 
   -------         MODULE        UTIL
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/04/2018  14:49:53  PAGE 8
-
-
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0090H         PUBLIC        P1
   D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-  C:0C34H         PUBLIC        _Timer0Delay
+  B:0098H.1       PUBLIC        TI
+  C:1301H         PUBLIC        SerialPortInit
+  C:12E8H         PUBLIC        _Timer0Delay
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
+  B:00A8H.3       PUBLIC        ET1
   B:0088H.5       PUBLIC        TF0
-  C:0CA3H         PUBLIC        Timer0Init
+  C:1368H         PUBLIC        Timer0Init
   D:008CH         PUBLIC        TH0
+  D:008DH         PUBLIC        TH1
   D:008AH         PUBLIC        TL0
+  D:008BH         PUBLIC        TL1
   B:0088H.4       PUBLIC        TR0
+  B:0088H.6       PUBLIC        TR1
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          TIMER0INIT
-  C:0CA3H         LINE#         14
-  C:0CA3H         LINE#         15
-  C:0CA3H         LINE#         16
-  C:0CA6H         LINE#         17
-  C:0CA9H         LINE#         18
+  C:1368H         LINE#         15
+  C:1368H         LINE#         16
+  C:1368H         LINE#         17
+  C:136BH         LINE#         18
+  C:136EH         LINE#         19
   -------         ENDPROC       TIMER0INIT
   -------         PROC          _TIMER0DELAY
   D:0006H         SYMBOL        n
-  C:0C34H         LINE#         20
-  C:0C34H         LINE#         21
-  C:0C34H         LINE#         22
-  C:0C34H         LINE#         23
-  C:0C37H         LINE#         24
-  C:0C3AH         LINE#         25
-  C:0C3CH         LINE#         26
-  C:0C3FH         LINE#         27
-  C:0C41H         LINE#         28
-  C:0C43H         LINE#         29
-  C:0C4CH         LINE#         30
+  C:12E8H         LINE#         21
+  C:12E8H         LINE#         22
+  C:12E8H         LINE#         23
+  C:12E8H         LINE#         24
+  C:12EBH         LINE#         25
+  C:12EEH         LINE#         26
+  C:12F0H         LINE#         27
+  C:12F3H         LINE#         28
+  C:12F5H         LINE#         29
+  C:12F7H         LINE#         30
+  C:1300H         LINE#         31
   -------         ENDPROC       _TIMER0DELAY
+  -------         PROC          SERIALPORTINIT
+  C:1301H         LINE#         33
+  C:1301H         LINE#         34
+  C:1301H         LINE#         35
+  C:1304H         LINE#         36
+  C:1307H         LINE#         37
+  C:130AH         LINE#         38
+  C:130DH         LINE#         39
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/13/2018  18:06:40  PAGE 10
+
+
+  C:1310H         LINE#         40
+  C:1312H         LINE#         41
+  C:1314H         LINE#         42
+  C:1316H         LINE#         43
+  C:1318H         LINE#         44
+  -------         ENDPROC       SERIALPORTINIT
   -------         ENDMOD        UTIL
 
   -------         MODULE        TEST
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0090H         PUBLIC        P1
   D:00B0H         PUBLIC        P3
-  D:0008H         PUBLIC        SJA_SEND_BUFFER
+  C:110CH         PUBLIC        _PrintData
   D:00A8H         PUBLIC        IE
-  C:0A56H         PUBLIC        TestSJASend
-  D:0013H         PUBLIC        SJA_CAN_Filter2
+  C:0E3DH         PUBLIC        TestSJASend
+  D:0008H         PUBLIC        SJA_CAN_Filter2
   D:00B8H         PUBLIC        IP
-  C:0CAAH         PUBLIC        main
-  C:0A95H         PUBLIC        TestSJARcv
+  C:136FH         PUBLIC        main
+  C:1319H         PUBLIC        TestSerialPort
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
   B:0090H.2       PUBLIC        SJA_RST
-  D:001BH         PUBLIC        SJA_RCV_BUFFER
-  C:0BF7H         PUBLIC        TestSJAConnect
-  D:0028H         PUBLIC        SJA_CAN_Filter
+  C:0E2AH         SYMBOL        _?ix1000
+  C:0E35H         SYMBOL        _?ix1001
+  C:1153H         PUBLIC        TestSJAConnect
   D:00C8H         PUBLIC        T2CON
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/04/2018  14:49:53  PAGE 9
-
-
-  C:0B74H         PUBLIC        TestSJAFilter
-  B:0090H.0       PUBLIC        D1
   D:00D0H         PUBLIC        PSW
   -------         PROC          MAIN
-  C:0CAAH         LINE#         29
-  C:0CAAH         LINE#         30
-  C:0CAAH         LINE#         31
+  C:136FH         LINE#         23
+  C:136FH         LINE#         24
+  C:136FH         LINE#         25
   -------         ENDPROC       MAIN
+  -------         PROC          TESTSERIALPORT
+  C:1319H         LINE#         29
+  C:1319H         LINE#         30
+  C:1319H         LINE#         31
+  C:131CH         LINE#         32
+  C:131FH         LINE#         33
+  C:131FH         LINE#         34
+  C:1328H         LINE#         35
+  C:132FH         LINE#         36
+  -------         ENDPROC       TESTSERIALPORT
   -------         PROC          TESTSJACONNECT
-  C:0BF7H         LINE#         35
-  C:0BF7H         LINE#         36
-  C:0BF7H         LINE#         37
-  C:0BFAH         LINE#         38
-  C:0BFCH         LINE#         39
-  C:0BFCH         LINE#         40
-  C:0C02H         LINE#         41
-  C:0C04H         LINE#         42
-  C:0C0BH         LINE#         43
-  C:0C0DH         LINE#         44
-  C:0C0FH         LINE#         45
-  C:0C16H         LINE#         46
-  C:0C16H         LINE#         47
+  -------         DO            
+  D:0055H         SYMBOL        write_data
+  D:0056H         SYMBOL        read_data
+  -------         ENDDO         
+  C:1153H         LINE#         40
+  C:1153H         LINE#         41
+  C:1153H         LINE#         43
+  C:1156H         LINE#         44
+  C:1159H         LINE#         45
+  C:1159H         LINE#         46
+  C:115CH         LINE#         47
+  C:1165H         LINE#         48
+  C:116CH         LINE#         49
+  C:1173H         LINE#         50
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/13/2018  18:06:40  PAGE 11
+
+
+  C:1182H         LINE#         51
+  C:1189H         LINE#         52
   -------         ENDPROC       TESTSJACONNECT
   -------         PROC          TESTSJASEND
-  C:0A56H         LINE#         50
-  C:0A56H         LINE#         51
-  C:0A56H         LINE#         52
-  C:0A59H         LINE#         53
-  C:0A5BH         LINE#         54
-  C:0A62H         LINE#         55
-  C:0A64H         LINE#         56
-  C:0A71H         LINE#         57
-  C:0A71H         LINE#         58
-  C:0A7FH         LINE#         59
-  C:0A81H         LINE#         60
-  C:0A88H         LINE#         61
-  C:0A8AH         LINE#         62
-  C:0A8CH         LINE#         63
-  C:0A93H         LINE#         64
-  C:0A93H         LINE#         65
+  -------         DO            
+  D:0022H         SYMBOL        i
+  D:0023H         SYMBOL        len
+  D:0024H         SYMBOL        SJA_SEND_DATA
+  D:002FH         SYMBOL        SJA_CAN_Filter
+  -------         ENDDO         
+  C:0E3DH         LINE#         123
+  C:0E3DH         LINE#         124
+  C:0E3DH         LINE#         128
+  C:0E50H         LINE#         134
+  C:0E63H         LINE#         139
+  C:0E66H         LINE#         142
+  C:0E69H         LINE#         143
+  C:0E6CH         LINE#         146
+  C:0E6EH         LINE#         147
+  C:0E75H         LINE#         148
+  C:0E77H         LINE#         149
+  C:0E89H         LINE#         151
+  C:0E89H         LINE#         152
+  C:0E8CH         LINE#         153
+  C:0E95H         LINE#         154
+  C:0EA0H         LINE#         157
+  C:0EB0H         LINE#         158
+  C:0EB4H         LINE#         159
+  C:0EB6H         LINE#         160
+  C:0EBDH         LINE#         161
+  C:0EBDH         LINE#         162
+  C:0EC8H         LINE#         163
+  C:0ED8H         LINE#         164
+  C:0EE8H         LINE#         165
+  C:0EF8H         LINE#         166
+  C:0F08H         LINE#         167
+  C:0F0FH         LINE#         168
   -------         ENDPROC       TESTSJASEND
-  -------         PROC          TESTSJARCV
-  C:0A95H         LINE#         68
-  C:0A95H         LINE#         69
-  C:0A95H         LINE#         70
-  C:0A98H         LINE#         71
-  C:0A9AH         LINE#         72
-  C:0AA1H         LINE#         73
-  C:0AA3H         LINE#         74
-  C:0AB0H         LINE#         75
-  C:0AB0H         LINE#         76
-  C:0ABCH         LINE#         77
-  C:0ABEH         LINE#         78
-  C:0AC5H         LINE#         79
-  C:0AC7H         LINE#         80
-  C:0AC9H         LINE#         81
-  C:0AD0H         LINE#         82
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/04/2018  14:49:53  PAGE 10
-
-
-  C:0AD0H         LINE#         83
-  -------         ENDPROC       TESTSJARCV
-  -------         PROC          TESTSJAFILTER
-  C:0B74H         LINE#         86
-  C:0B74H         LINE#         87
-  C:0B74H         LINE#         88
-  C:0B77H         LINE#         89
-  C:0B79H         LINE#         90
-  C:0B80H         LINE#         91
-  C:0B82H         LINE#         92
-  C:0B8FH         LINE#         93
-  C:0B9AH         LINE#         94
-  C:0B9AH         LINE#         95
-  C:0BA6H         LINE#         96
-  C:0BA8H         LINE#         97
-  C:0BA8H         LINE#         98
-  -------         ENDPROC       TESTSJAFILTER
+  -------         PROC          _PRINTDATA
+  D:0037H         SYMBOL        buf
+  D:003AH         SYMBOL        len
+  -------         DO            
+  D:003BH         SYMBOL        i
+  -------         ENDDO         
+  C:110CH         LINE#         205
+  C:1114H         LINE#         206
+  C:1114H         LINE#         208
+  C:1126H         LINE#         209
+  C:1140H         LINE#         210
+  C:114AH         LINE#         211
+  -------         ENDPROC       _PRINTDATA
   -------         ENDMOD        TEST
 
+  -------         MODULE        ?C?COPY
+  C:0C2CH         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/13/2018  18:06:40  PAGE 12
+
+
   -------         MODULE        ?C?CLDPTR
-  C:0995H         PUBLIC        ?C?CLDPTR
+  C:0C52H         PUBLIC        ?C?CLDPTR
   -------         ENDMOD        ?C?CLDPTR
 
   -------         MODULE        ?C?CLDOPTR
-  C:09AEH         PUBLIC        ?C?CLDOPTR
+  C:0C6BH         PUBLIC        ?C?CLDOPTR
   -------         ENDMOD        ?C?CLDOPTR
 
   -------         MODULE        ?C?CSTPTR
-  C:09DBH         PUBLIC        ?C?CSTPTR
+  C:0C98H         PUBLIC        ?C?CSTPTR
   -------         ENDMOD        ?C?CSTPTR
 
   -------         MODULE        ?C?CSTOPTR
-  C:09EDH         PUBLIC        ?C?CSTOPTR
+  C:0CAAH         PUBLIC        ?C?CSTOPTR
   -------         ENDMOD        ?C?CSTOPTR
+
+  -------         MODULE        PRINTF
+  D:003DH         PUBLIC        ?_PRINTF517?BYTE
+  D:003DH         PUBLIC        ?_PRINTF?BYTE
+  D:003DH         PUBLIC        ?_SPRINTF517?BYTE
+  D:003DH         PUBLIC        ?_SPRINTF?BYTE
+  C:0862H         PUBLIC        _PRINTF
+  C:0862H         PUBLIC        _PRINTF517
+  C:085CH         PUBLIC        _SPRINTF
+  C:085CH         PUBLIC        _SPRINTF517
+  -------         ENDMOD        PRINTF
+
+  -------         MODULE        ?C?PLDIIDATA
+  C:0CCCH         PUBLIC        ?C?PLDIIDATA
+  -------         ENDMOD        ?C?PLDIIDATA
+
+  -------         MODULE        ?C?CCASE
+  C:0CDCH         PUBLIC        ?C?CCASE
+  -------         ENDMOD        ?C?CCASE
+
+  -------         MODULE        PUTCHAR
+  C:1265H         PUBLIC        _PUTCHAR
+  -------         ENDMOD        PUTCHAR
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJASTDINIT?SJAHELPER
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJARCVDATA?SJAHELPER
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJACONFIGFILTER?SJAHELPER
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?TESTSERIALPORT?TEST
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?TESTSJACONNECT?TEST
 
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?TESTSJARCV?TEST
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?TESTSJAFILTER?TEST
-
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 03B5H BYTE (46%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 05CBH BYTE (72%) *
 ******************************************************************************
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/13/2018  18:06:40  PAGE 13
 
-Program Size: data=72.0 xdata=3 code=1200
-LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)
+
+
+Program Size: data=87.1 xdata=0 code=2933
+LINK/LOCATE RUN COMPLETE.  5 WARNING(S),  0 ERROR(S)

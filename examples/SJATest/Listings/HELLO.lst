@@ -1,0 +1,187 @@
+C51 COMPILER V9.57.0.0   HELLO                                                             07/13/2018 14:58:29 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE HELLO
+OBJECT MODULE PLACED IN .\Objects\HELLO.obj
+COMPILER INVOKED BY: D:\Keil\Keil_v5\C51\BIN\C51.EXE HELLO.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\HELLO.lst) OBJECT(.\Objects\HELLO.obj)
+
+line level    source
+
+   1          /*------------------------------------------------------------------------------
+   2          HELLO.C
+   3          Copyright 1995-2005 Keil Software, Inc.
+   4          ------------------------------------------------------------------------------*/
+   5           
+   6          #include <REG52.H>                /* special function register declarations   */
+   7                                            /* for the intended 8051 derivative         */
+   8           
+   9          #include <stdio.h>                /* prototype declarations for I/O functions */
+  10          #include "sja1000_reg.h"                  /* sja1000T的寄存器定义文件*/
+  11          #include <absacc.h>                               /* 主要是用于寻址外部存储器*/
+  12           
+  13          sbit SJARst = P2^6;                       //复位控制     
+  14          
+  15          void SJA1000_Tx_Display(void)
+  16          {
+  17   1              printf( " TBSR3 = 0x%x \n", REG_TxBufferRd3 );  
+  18   1              printf( " TBSR4 = 0x%x \n", REG_TxBufferRd4 );  
+  19   1              printf( " TBSR5 = 0x%x \n", REG_TxBufferRd5 );  
+  20   1              printf( " TBSR6 = 0x%x \n", REG_TxBufferRd6 );  
+  21   1              printf( " TBSR7 = 0x%x \n", REG_TxBufferRd7 );  
+  22   1              printf( " TBSR8 = 0x%x \n", REG_TxBufferRd8 );  
+  23   1              printf( " TBSR9 = 0x%x \n", REG_TxBufferRd9 );  
+  24   1              printf( " TBSR10 = 0x%x \n",REG_TxBufferRd10);  
+  25   1      }
+  26          /*显示发送的信息,之前直接使用发送缓冲区，这种方法是错误的，因为0x10开始的
+             -13个寄存器，读的时候是接收缓冲区，写的时候是发送缓冲区*/
+  27           
+  28          void SJA_Init(void)                          
+  29          {    
+  30   1              //SJA1000复位                                        
+  31   1               unsigned char i;                            
+  32   1               for(i = 0;i < 125;i++);           
+  33   1               SJARst = 0;                                 
+  34   1               for(i = 0;i < 125;i++);//给RST引脚一个低脉冲
+  35   1               SJARst = 1;                                 
+  36   1               for(i = 0;i < 125;i++);                     
+  37   1      }  
+  38          
+  39          void SJA1000_TxData(void)
+  40          {
+  41   1              while(REG_SR & 0x10);           //当SJA1000不处于接收状态时才可继续执行，SR.4==0x1，正在接收�
+             -��等待
+  42   1          while(!(REG_SR & 0x08));    //SR.3=0,发送请求未处理完，等待直到SR.3=1
+  43   1          while(!(REG_SR & 0x04));    //SR.2=0,发送缓冲器被锁。等待直到SR.2=1   
+  44   1              
+  45   1              REG_TxBuffer0 = 0x08;//帧信息,标准帧，数据帧，8字节        
+  46   1                                                                         
+  47   1              REG_TxBuffer1 = 0xEA;//标识符1                             
+  48   1              REG_TxBuffer2 = 0x60;//标识符2                     
+  49   1                                                               
+  50   1              REG_TxBuffer3 = 0x11;//发送数据位：1                       
+  51   1              REG_TxBuffer4 = 0x22;//发送数据位：2                       
+  52   1              REG_TxBuffer5 = 0x33;                                      
+C51 COMPILER V9.57.0.0   HELLO                                                             07/13/2018 14:58:29 PAGE 2   
+
+  53   1              REG_TxBuffer6 = 0x44;                                      
+  54   1              REG_TxBuffer7 = 0x55;                                      
+  55   1              REG_TxBuffer8 = 0x66;                                      
+  56   1              REG_TxBuffer9 = 0x77;                                      
+  57   1              REG_TxBuffer10 = 0x88;//here Over                          
+  58   1                                   
+  59   1              SJA1000_Tx_Display();
+  60   1              REG_CMD = 0x12;                         //自接收
+  61   1              while(!(REG_SR & 0x08));        //检测发送完毕    
+  62   1      }
+  63          
+  64          /*------------------------------------------------
+  65          The main C function.  Program execution starts
+  66          here after stack initialization.
+  67          ------------------------------------------------*/
+  68          void main (void) 
+  69          {
+  70   1       
+  71   1      /*------------------------------------------------
+  72   1      Setup the serial port for 9600 baud at 11.0592MHz.
+  73   1      ------------------------------------------------*/
+  74   1          SCON  = 0x50;                       /* SCON: mode 1, 8-bit UART, enable rcvr      */
+  75   1          TMOD |= 0x20;               /* TMOD: timer 1, mode 2, 8-bit reload        */
+  76   1          TH1   = 0xFD;               /* TH1:  reload value for 9600 baud @ 11.0595MHZ   */
+  77   1          TR1   = 1;                  /* TR1:  timer 1 run                          */
+  78   1          TI    = 1;                  /* TI:   set TI to send first char of UART    */
+  79   1              PX0=1;                                          //外部中断0高优先级
+  80   1              IT0=1;                                          //设置INT0为下降沿中断
+  81   1              EX0=1;                                          //使能INT0中断
+  82   1       
+  83   1      /*------------------------------------------------
+  84   1      Note that an embedded program never exits (because
+  85   1      there is no operating system to return to).  It
+  86   1      must loop and execute forever.
+  87   1      ------------------------------------------------*/
+  88   1         
+  89   1          printf ("Hello World\n");   /* Print "Hello World" */
+  90   1              SJA_Init();//主要是使芯片复位
+  91   1              /*
+  92   1                      Enter the reset Mode
+  93   1              */
+  94   1              REG_MODE = 0x01; 
+  95   1              while((REG_MODE&0x01)!= 0x01);  //确定进入复位模式 
+  96   1              printf("1.Enter the Reset Mode,REG_MODE=0x%x\n",REG_MODE);
+  97   1                    
+  98   1              REG_CDR = 0xc8;         //设置时钟分频寄存器。CDR.7 = 1,PeliCAN模式；CDR.6（RX0激活，关闭RX1�
+             -��  fCLKOUT = fOSC/2, CDR.3(Close the CLKOUT)
+  99   1              REG_RBSA = 0x00;        //RX缓冲器起始地址
+ 100   1                         
+ 101   1              /* Configure acceptance code and mask register */                                                            
+ 102   1              REG_ACR0 = 0xff;        //验收码寄存器                       
+ 103   1          REG_ACR1 = 0xff;                            
+ 104   1              REG_ACR2 = 0xff;                            
+ 105   1              REG_ACR3 = 0xff;                            
+ 106   1                                                                   
+ 107   1              REG_AMR0 = 0xff;        //验收屏蔽寄存器，接收任何标识符的数据包         
+ 108   1              REG_AMR1 = 0xff;                            
+ 109   1              REG_AMR2 = 0xff;                            
+ 110   1              REG_AMR3 = 0xff;    
+ 111   1                                      
+ 112   1       
+ 113   1              /*configure bus timing registers*/
+C51 COMPILER V9.57.0.0   HELLO                                                             07/13/2018 14:58:29 PAGE 3   
+
+ 114   1              REG_BTR0 = 0x00;                            
+ 115   1              REG_BTR1 = 0x14;        //100k     
+ 116   1                                                  
+ 117   1              REG_IR_ABLE = 0x01;     //Peli模式中断使能,接收中断使能，发送中断禁止                  
+ 118   1          
+ 119   1              REG_OCR = 0x1a;         //设置输出模式：正常输出，从TX0口输出;TX1悬空
+ 120   1                                                    
+ 121   1              REG_MODE = 0x0c;        //进入自接收模式.CDR.3(选择单个验收滤波器),CDR.2 (此模式可以检测
+             -所有节点)
+ 122   1       
+ 123   1              while(REG_MODE != 0x0c);//确定进入自接收模式下
+ 124   1              printf("2.Enter the self-test Mode,REG_MODE=0x%x\n",REG_MODE);
+ 125   1       
+ 126   1              SJA1000_TxData();//发送数据
+ 127   1              printf("\n\n");
+ 128   1              //SJA1000_Rx_Display();//接收数据展示
+ 129   1              EA = 1;//使能全局中断
+ 130   1              while(1);
+ 131   1      }
+ 132          
+ 133          /************************************************************
+ 134                          函数：ex0_int 
+ 135                          说明：中断服务程序
+ 136                          入口：无
+ 137                          返回：无
+ 138          ***********************************************************/
+ 139          void handle_int(void) interrupt 0 using 1
+ 140          {
+ 141   1              if(REG_IR & 0x01)      //产生了接收中断
+ 142   1              { 
+ 143   2                      #pragma disable
+ 144   2                      printf( " Received message.\n");
+ 145   2                      printf( " RBSR3 = %x \n", REG_RxBuffer3 );
+ 146   2                      printf( " RBSR4 = %x \n", REG_RxBuffer4 );
+ 147   2                      printf( " RBSR5 = %x \n", REG_RxBuffer5 );     
+ 148   2                      printf( " RBSR6 = %x \n", REG_RxBuffer6 );     
+ 149   2                      printf( " RBSR7 = %x \n", REG_RxBuffer7 );     
+ 150   2                      printf( " RBSR8 = %x \n", REG_RxBuffer8 );     
+ 151   2                      printf( " RBSR9 = %x \n", REG_RxBuffer9 );     
+ 152   2                      printf( " RBSR10 = %x \n",REG_RxBuffer10);   
+ 153   2              }  
+ 154   1      }
+*** WARNING C316 IN LINE 154 OF HELLO.c: unterminated conditionals
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    539    ----
+   CONSTANT SIZE    =    358    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

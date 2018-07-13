@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   TEST                                                              07/04/2018 14:49:53 PAGE 1   
+C51 COMPILER V9.57.0.0   TEST                                                              07/13/2018 18:06:39 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE TEST
@@ -9,114 +9,232 @@ COMPILER INVOKED BY: D:\Keil\Keil_v5\C51\BIN\C51.EXE test.c OPTIMIZE(8,SPEED) BR
 line level    source
 
    1          #include <reg52.h>
-   2          #include "util.h"
-   3          #include "SJAhelper.h"
-   4          
-   5          /*************************************************************/
-   6          sbit D1 = P1^0;
-   7          sbit SJA_RST = P1^2;
-   8          /* 验收滤波器的参数，接收所有帧 */
-   9          unsigned char SJA_CAN_Filter[] = {
-  10                  0x00, 0x00, 0x00, 0x00,                         //ACR0~ACR3
-  11                  0xff, 0xff, 0xff, 0xff                          //AMR0~AMR3
-  12          };
-  13          unsigned char SJA_CAN_Filter2[] = {
-  14                  0x21, 0x10, 0x05, 0x24,                         //ACR0~ACR3
-  15                  0x00, 0x00, 0x00, 0x03                          //AMR0~AMR3
-  16          };
-  17          unsigned char SJA_SEND_BUFFER[] = {
-  18                  0x08,                                                                                   //标准数据帧，数据长度=8
-  19                  0xEA, 0x60,                                                                             //帧ID=0x753
-  20                  0x55, 0x55, 0x55, 0x55, 0xaa, 0xaa, 0xaa, 0xaa  //帧数据
-  21          };
-  22          unsigned char SJA_RCV_BUFFER[13];
-  23          /*************************************************************/
-  24          void TestSJAConnect(void);
-  25          void TestSJASend(void);
-  26          void TestSJARcv(void);
-  27          void TestSJAFilter(void);
-  28          /*************************************************************/
-  29          void main(void)
+   2          #include <stdio.h>
+   3          #include "util.h"
+   4          #include "SJAhelper.h"
+   5          
+   6          /*************************************************************/
+   7          sbit D1 = P1^0;
+   8          sbit SJA_RST = P1^2;
+   9          
+  10          unsigned char SJA_CAN_Filter2[] = {
+  11                  0x21, 0x10, 0x05, 0x24,                         //ACR0~ACR3
+  12                  0x00, 0x00, 0x00, 0x03                          //AMR0~AMR3
+  13          };
+  14          /*************************************************************/
+  15          void TestSJAConnect(void);
+  16          void TestSerialPort(void);
+  17          void TsetSJASendRcv(void);
+  18          void TestSJASend(void);
+  19          void TestSJARcv(void);
+  20          void TestSJAFilter(void);
+  21          void PrintData(unsigned char *buf, unsigned char len);
+  22          /*************************************************************/
+  23          void main(void)
+  24          {
+  25   1              TestSJASend();
+  26   1      }
+  27          /*************************************************************/
+  28          /* 串口输出测试 */
+  29          void TestSerialPort(void)
   30          {
-  31   1              TestSJASend();
-  32   1      }
-  33          /*************************************************************/
-  34          //SJA1000硬件连接测试
-  35          void TestSJAConnect(void)
-  36          {
-  37   1              Timer0Init();
-  38   1              D1 = 0;
-  39   1              for(;;){
-  40   2                      if(SJAConnectTest() == 1){
-  41   3                              D1 = !D1;
-  42   3                              Timer0Delay(100);
-  43   3                      }else{
-  44   3                              D1 = !D1;
-  45   3                              Timer0Delay(10);
-  46   3                      }
-  47   2              }
-  48   1      }
-  49          //SJA1000发送测试
-  50          void TestSJASend(void)
-  51          {
-  52   1              Timer0Init();
-  53   1              SJA_RST = 0;
-  54   1              Timer0Delay(50);
-C51 COMPILER V9.57.0.0   TEST                                                              07/04/2018 14:49:53 PAGE 2   
+  31   1              Timer0Init();
+  32   1              SerialPortInit();
+  33   1              while(1){
+  34   2                      printf("serial port test!~\n");
+  35   2                      Timer0Delay(100);
+  36   2              }
+  37   1      }
+  38          
+  39          /* 硬件连接测试 */
+  40          void TestSJAConnect(void)
+  41          {
+  42   1              unsigned char write_data, read_data;
+  43   1              Timer0Init();
+  44   1              SerialPortInit();
+  45   1              while(1){
+  46   2                      for(write_data = 0; write_data < 100; write_data++){
+  47   3                              printf("\n**************************************************************\n");
+  48   3                              WriteSJAReg(0x09, write_data);
+  49   3                              read_data = ReadSJAReg(0x09);
+  50   3                              printf("write data: %bu,\t read data: %bu\n", write_data, read_data);
+  51   3                              Timer0Delay(100);
+  52   3                      }
+  53   2              }
+  54   1      }
+C51 COMPILER V9.57.0.0   TEST                                                              07/13/2018 18:06:39 PAGE 2   
 
-  55   1              SJA_RST = 1;
-  56   1              SJAInit(0X00, 0X14, SJA_CAN_Filter);                    //初始化SJA1000，设置波特率1Mbps
-  57   1              for(;;){
-  58   2                      if(SJASendData(SJA_SEND_BUFFER, 0x02)){         //发送数据
-  59   3                              D1 = !D1;
-  60   3                              Timer0Delay(100);
-  61   3                      }else{
-  62   3                              D1 = !D1;
-  63   3                              Timer0Delay(10);
-  64   3                      }                       
-  65   2              }
-  66   1      }
-  67          
-  68          void TestSJARcv(void)
-  69          {
-  70   1              Timer0Init();
-  71   1              SJA_RST = 1;
-  72   1              Timer0Delay(50);
-  73   1              SJA_RST = 0;
-  74   1              SJAInit(0X00, 0X14, SJA_CAN_Filter);
-  75   1              for(;;){
-  76   2                      if(SJARcvData(SJA_RCV_BUFFER)){
-  77   3                              D1 = !D1;
-  78   3                              Timer0Delay(100);
-  79   3                      }else{
-  80   3                              D1 = !D1;
-  81   3                              Timer0Delay(10);
-  82   3                      }
-  83   2              }
-  84   1      }
-  85          
-  86          void TestSJAFilter(void)
-  87          {
-  88   1              Timer0Init();
-  89   1              SJA_RST = 1;
-  90   1              Timer0Delay(50);
-  91   1              SJA_RST = 0;
-  92   1              SJAInit(0X00, 0X14, SJA_CAN_Filter);
-  93   1              SJAConfigFilter(1, SJA_CAN_Filter2);
-  94   1              for(;;){
-  95   2                      if(SJARcvData(SJA_RCV_BUFFER)){
-  96   3                              D1 = !D1;
-  97   3                      }
-  98   2              }
-  99   1      }
+  55          
+  56          /* SJA1000自收发测试 */
+  57          //void TsetSJASendRcv(void)
+  58          //{
+  59          //      unsigned char i;
+  60          //      unsigned char len;
+  61          //      
+  62          //      unsigned char SJA_SEND_DATA[] = {
+  63          //              0x08,                                                                                   //标准数据帧，数据长度=8
+  64          //              0xEA, 0x60,                                                                             //帧ID=0x753
+  65          //              0x55, 0x55, 0x55, 0x55, 0xaa, 0xaa, 0xaa, 0xaa  //帧数据
+  66          //      };
+  67          //      /* 验收滤波器的参数，接收所有帧 */
+  68          //      unsigned char SJA_CAN_Filter[] = {
+  69          //              0x00, 0x00, 0x00, 0x00,                         //ACR0~ACR3
+  70          //              0xff, 0xff, 0xff, 0xff                          //AMR0~AMR3
+  71          //      };
+  72          //      
+  73          //      unsigned char SJA_SEND_BUFFER[13], SJA_RCV_BUFFER[13], SJA_RCV_BUFFER_FUNC[13];
+  74          //      
+  75          //      len = sizeof(SJA_SEND_DATA) / sizeof(unsigned char);
+  76          //      
+  77          //      /* init */
+  78          //      Timer0Init();
+  79          //      SerialPortInit();
+  80          //      
+  81          //      /* reset and init SJA1000 */
+  82          //      SJA_RST = 0;
+  83          //      Timer0Delay(50);
+  84          //      SJA_RST = 1;
+  85          //      SJAInit(0x0c, 0x00, 0x14, SJA_CAN_Filter);      //自检测 单滤波 波特率1mbps 接收所有帧
+  86          //      
+  87          //      for(;;){
+  88          //              for(i=0; i<100; i++){
+  89          //                      printf("\n**************************************************************\n");
+  90          //                      
+  91          //                      SJA_SEND_DATA[len-1] = i;
+  92          //                      
+  93          //                      SJASendData(SJA_SEND_DATA, 0x02);               //自收发模式
+  94          //                      printf("sja send data: ");
+  95          //                      PrintData(SJA_SEND_DATA, len);
+  96          //                      Timer0Delay(10);
+  97          //                      
+  98          //                      ReadSJARegBlock(96, SJA_SEND_BUFFER, len);
+  99          //                      printf("sja send buffer(at 0x60, read only): ");
+ 100          //                      PrintData(SJA_SEND_BUFFER, len);
+ 101          //                      Timer0Delay(10);
+ 102          //                      
+ 103          //                      ReadSJARegBlock(16, SJA_RCV_BUFFER, len);
+ 104          //                      printf("sja receive buffer(at 0x10): ");
+ 105          //                      PrintData(SJA_RCV_BUFFER, len);
+ 106          //                      Timer0Delay(10);
+ 107          //                      
+ 108          //                      SJARcvData(SJA_RCV_BUFFER_FUNC);
+ 109          //                      printf("sja receive buffer(using SJARcvData func): ");
+ 110          //                      PrintData(SJA_RCV_BUFFER_FUNC, len);
+ 111          //                      Timer0Delay(10);
+ 112          //                      
+ 113          //                      printf("sja ecc reg(at 0x0c): %bu\n", ReadSJAReg(0x0c));
+ 114          //                      printf("sja err warn reg(at 0x0d): %bu\n", ReadSJAReg(0x0d));
+ 115          //                      printf("sja rx error reg(at 0x0e): %bu\n", ReadSJAReg(0x0e));
+ 116          //                      printf("sja tx error reg(at 0x0f): %bu\n", ReadSJAReg(0x0f));
+C51 COMPILER V9.57.0.0   TEST                                                              07/13/2018 18:06:39 PAGE 3   
+
+ 117          //                      Timer0Delay(300);
+ 118          //              }
+ 119          //      }
+ 120          //}
+ 121          
+ 122          //SJA1000发送测试
+ 123          void TestSJASend(void)
+ 124          {
+ 125   1              unsigned char i;
+ 126   1              unsigned char len;
+ 127   1              
+ 128   1              unsigned char SJA_SEND_DATA[] = {
+ 129   1                      0x08,                                                                                   //标准数据帧，数据长度=8
+ 130   1                      0xEA, 0x60,                                                                             //帧ID=0x753
+ 131   1                      0x55, 0x55, 0x55, 0x55, 0xaa, 0xaa, 0xaa, 0xaa  //帧数据
+ 132   1              };
+ 133   1              /* 验收滤波器的参数，接收所有帧 */
+ 134   1              unsigned char SJA_CAN_Filter[] = {
+ 135   1                      0x00, 0x00, 0x00, 0x00,                         //ACR0~ACR3
+ 136   1                      0xff, 0xff, 0xff, 0xff                          //AMR0~AMR3
+ 137   1              };
+ 138   1              
+ 139   1              len = sizeof(SJA_SEND_DATA) / sizeof(unsigned char);
+ 140   1              
+ 141   1              /* init */
+ 142   1              Timer0Init();
+ 143   1              SerialPortInit();
+ 144   1      
+ 145   1              /* reset and init SJA1000 */
+ 146   1              SJA_RST = 0;
+ 147   1              Timer0Delay(50);
+ 148   1              SJA_RST = 1;
+ 149   1              SJAInit(0x08, 0x00, 0x14, SJA_CAN_Filter);      //正常工作 单滤波 波特率1mbps 接收所有帧
+ 150   1      
+ 151   1              for(;;){
+ 152   2                      for(i=0; i<100; i++){
+ 153   3                              printf("\n**************************************************************\n");
+ 154   3                              SJA_SEND_DATA[len-1] = i+1;
+ 155   3                              
+ 156   3                              //单次发送模式
+ 157   3                              if(SJASendData(SJA_SEND_DATA, 0x01)){
+ 158   4                                      printf("sja send data success: ");
+ 159   4                              }else{
+ 160   4                                      printf("sja send data failed: ");
+ 161   4                              }
+ 162   3                              PrintData(SJA_SEND_DATA, len);
+ 163   3                              printf("sja ecc reg(at 0x0c): %bu\n", ReadSJAReg(0x0c));
+ 164   3                              printf("sja err warn reg(at 0x0d): %bu\n", ReadSJAReg(0x0d));
+ 165   3                              printf("sja rx error reg(at 0x0e): %bu\n", ReadSJAReg(0x0e));
+ 166   3                              printf("sja tx error reg(at 0x0f): %bu\n", ReadSJAReg(0x0f));
+ 167   3                              Timer0Delay(300);
+ 168   3                      }
+ 169   2              }
+ 170   1      }
+ 171          
+ 172          //void TestSJARcv(void)
+ 173          //{
+ 174          //      Timer0Init();
+ 175          //      SJA_RST = 1;
+ 176          //      Timer0Delay(50);
+ 177          //      SJA_RST = 0;
+ 178          //      SJAInit(0x00, 0x14, SJA_CAN_Filter);
+C51 COMPILER V9.57.0.0   TEST                                                              07/13/2018 18:06:39 PAGE 4   
+
+ 179          //      for(;;){
+ 180          //              if(SJARcvData(SJA_RCV_BUFFER)){
+ 181          //                      D1 = !D1;
+ 182          //                      Timer0Delay(100);
+ 183          //              }else{
+ 184          //                      D1 = !D1;
+ 185          //                      Timer0Delay(10);
+ 186          //              }
+ 187          //      }
+ 188          //}
+ 189          
+ 190          //void TestSJAFilter(void)
+ 191          //{
+ 192          //      Timer0Init();
+ 193          //      SJA_RST = 1;
+ 194          //      Timer0Delay(50);
+ 195          //      SJA_RST = 0;
+ 196          //      SJAInit(0x00, 0x14, SJA_CAN_Filter);
+ 197          //      SJAConfigFilter(1, SJA_CAN_Filter2);
+ 198          //      for(;;){
+ 199          //              if(SJARcvData(SJA_RCV_BUFFER)){
+ 200          //                      D1 = !D1;
+ 201          //              }
+ 202          //      }
+ 203          //}
+ 204          
+ 205          void PrintData(unsigned char *buf, unsigned char len)
+ 206          {
+ 207   1              int i;
+ 208   1              for(i=0; i<len; i++){
+ 209   2                      printf("%bu\t", buf[i]);
+ 210   2              }
+ 211   1              printf("\n");
+ 212   1      }
+ 213          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    214    ----
-   CONSTANT SIZE    =   ----    ----
+   CODE SIZE        =    388    ----
+   CONSTANT SIZE    =    315    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     40    ----
+   DATA SIZE        =      8      29
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

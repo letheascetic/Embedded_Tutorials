@@ -9,5 +9,6 @@
 
 void Timer0Init(void);
 void Timer0Delay(unsigned int n);
+void SerialPortInit(void);
 
 #endif

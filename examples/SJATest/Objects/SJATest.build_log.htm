@@ -18,29 +18,22 @@ Hex Converter:   OH51.exe V2.7.0.0
 CPU DLL:         S8051.DLL V3.113.0.0
 Dialog DLL:      DP51.DLL V2.64.0.0 
 <h2>Project:</h2>
-E:\Ascetic\Embedded_Tutorials\examples\SJA1000\SJA1000.uvproj
+E:\Ascetic\Embedded_Tutorials\examples\SJATest\SJATest.uvproj
 Project File Date:  07/13/2018
 
 <h2>Output:</h2>
 Rebuild target 'Target 1'
 assembling STARTUP.A51...
-compiling SJAhelper.c...
-compiling util.c...
-compiling test.c...
+compiling HELLO.c...
+HELLO.c(154): warning C316: unterminated conditionals
 linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_SJASTDINIT?SJAHELPER
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_SJARCVDATA?SJAHELPER
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_SJACONFIGFILTER?SJAHELPER
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?TESTSERIALPORT?TEST
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?TESTSJACONNECT?TEST
-Program Size: data=87.1 xdata=0 code=2933
-creating hex file from ".\Objects\SJA1000"...
-".\Objects\SJA1000" - 0 Error(s), 5 Warning(s).
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?PRINTF?PRINTF
+    CALLER1: ?C_C51STARTUP
+    CALLER2: ?PR?HANDLE_INT?HELLO
+Program Size: data=59.2 xdata=0 code=1956
+creating hex file from ".\Objects\SJATest"...
+".\Objects\SJATest" - 0 Error(s), 2 Warning(s).
 Build Time Elapsed:  00:00:01
 </pre>
 </body>

@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\HELLO.obj" 
+TO ".\Objects\SJATest" 
+PRINT(".\Listings\SJATest.m51") RAMSIZE(256) 

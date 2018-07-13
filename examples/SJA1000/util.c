@@ -2,6 +2,7 @@
 #include <reg52.h>
 
 #define T0_MASK 0x0F
+#define T1_MASK 0xF0
 
 /*************************************************************
  * 函数名称：TimerDelay
@@ -13,7 +14,7 @@
 **************************************************************/
 void Timer0Init(void)
 {
-	TMOD &= ~T0_MASK;		//清楚旧设置
+	TMOD &= ~T0_MASK;		//清除T0旧设置
 	TMOD |= 0x01;			//设置为16位定时模式
 }
 
@@ -28,3 +29,17 @@ void Timer0Delay(unsigned int n)
 		TF0 = 0;
 	}while(--n);
 }
+
+void SerialPortInit(void)
+{
+	SCON = 0x50;
+	TMOD &= ~T1_MASK;
+	TMOD |= 0x20;			//T1设置为8位自动装载模式
+	TH1 = 0xFD;
+	TL1 = 0x00;
+	TI = 1;
+	ET1 = 0;
+	EA = 1;
+	TR1 = 1;
+}
+
