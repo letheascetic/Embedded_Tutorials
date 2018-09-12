@@ -13,6 +13,7 @@
     <tExt>*.txt; *.h; *.inc</tExt>
     <pExt>*.plm</pExt>
     <CppX>*.cpp</CppX>
+    <nMigrate>0</nMigrate>
   </Extensions>
 
   <DaveTm>
@@ -31,6 +32,7 @@
         <BeepAtEnd>1</BeepAtEnd>
         <RunSim>1</RunSim>
         <RunTarget>0</RunTarget>
+        <RunAbUc>0</RunAbUc>
       </OPTTT>
       <OPTHX>
         <HexSelection>0</HexSelection>
@@ -71,7 +73,7 @@
         <LExpSel>0</LExpSel>
       </OPTXL>
       <OPTFL>
-        <tvExp>1</tvExp>
+        <tvExp>0</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
@@ -88,16 +90,6 @@
           <Path>DATASHTS\ATMEL\AT_C51ISM.PDF</Path>
         </Book>
       </Books>
-      <DllOpt>
-        <SimDllName>S8051.DLL</SimDllName>
-        <SimDllArguments></SimDllArguments>
-        <SimDlgDllName>DP51.DLL</SimDlgDllName>
-        <SimDlgDllArguments>-pAT52</SimDlgDllArguments>
-        <TargetDllName>S8051.DLL</TargetDllName>
-        <TargetDllArguments></TargetDllArguments>
-        <TargetDlgDllName>TP51.DLL</TargetDlgDllName>
-        <TargetDlgDllArguments>-pAT52</TargetDlgDllArguments>
-      </DllOpt>
       <DebugOpt>
         <uSim>1</uSim>
         <uTrg>0</uTrg>
@@ -116,8 +108,13 @@
         <tRfunc>0</tRfunc>
         <tRbox>1</tRbox>
         <tRtrace>1</tRtrace>
+        <sRSysVw>1</sRSysVw>
+        <tRSysVw>1</tRSysVw>
         <sRunDeb>0</sRunDeb>
         <sLrtime>0</sLrtime>
+        <bEvRecOn>1</bEvRecOn>
+        <bSchkAxf>0</bSchkAxf>
+        <bTchkAxf>0</bTchkAxf>
         <nTsel>-1</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
@@ -146,6 +143,9 @@
           <ItemText>sr</ItemText>
         </Ww>
       </WatchWindow2>
+      <Tracepoint>
+        <THDelay>0</THDelay>
+      </Tracepoint>
       <DebugFlag>
         <trace>0</trace>
         <periodic>1</periodic>
@@ -172,11 +172,19 @@
         <newCpu>0</newCpu>
         <uProt>0</uProt>
       </DebugFlag>
-      <Tracepoint>
-        <THDelay>0</THDelay>
-      </Tracepoint>
       <LintExecutable></LintExecutable>
       <LintConfigFile></LintConfigFile>
+      <bLintAuto>0</bLintAuto>
+      <bAutoGenD>0</bAutoGenD>
+      <LntExFlags>0</LntExFlags>
+      <pMisraName></pMisraName>
+      <pszMrule></pszMrule>
+      <pSingCmds></pSingCmds>
+      <pMultCmds></pMultCmds>
+      <pMisraNamep></pMisraNamep>
+      <pszMrulep></pszMrulep>
+      <pSingCmdsp></pSingCmdsp>
+      <pMultCmdsp></pMultCmdsp>
     </TargetOption>
   </Target>
 
@@ -191,11 +199,7 @@
       <FileNumber>1</FileNumber>
       <FileType>2</FileType>
       <tvExp>0</tvExp>
-      <Focus>1</Focus>
-      <ColumnNumber>2625520</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>5</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\STARTUP.A51</PathWithFileName>
       <FilenameWithoutPath>STARTUP.A51</FilenameWithoutPath>
@@ -206,12 +210,8 @@
       <GroupNumber>1</GroupNumber>
       <FileNumber>2</FileNumber>
       <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <Focus>1</Focus>
-      <ColumnNumber>33</ColumnNumber>
+      <tvExp>1</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>17</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\SJAhelper.c</PathWithFileName>
       <FilenameWithoutPath>SJAhelper.c</FilenameWithoutPath>
@@ -223,11 +223,7 @@
       <FileNumber>3</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
-      <Focus>1</Focus>
-      <ColumnNumber>2625520</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>5</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\SJA1000REG.h</PathWithFileName>
       <FilenameWithoutPath>SJA1000REG.h</FilenameWithoutPath>
@@ -239,11 +235,7 @@
       <FileNumber>4</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
-      <Focus>1</Focus>
-      <ColumnNumber>10</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>15</TopLine>
-      <CurrentLine>41</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\util.c</PathWithFileName>
       <FilenameWithoutPath>util.c</FilenameWithoutPath>
@@ -254,12 +246,8 @@
       <GroupNumber>1</GroupNumber>
       <FileNumber>5</FileNumber>
       <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <Focus>1</Focus>
-      <ColumnNumber>21</ColumnNumber>
+      <tvExp>1</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>11</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\test.c</PathWithFileName>
       <FilenameWithoutPath>test.c</FilenameWithoutPath>
@@ -271,11 +259,7 @@
       <FileNumber>6</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
-      <Focus>1</Focus>
-      <ColumnNumber>2625520</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>5</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\SJAhelper.h</PathWithFileName>
       <FilenameWithoutPath>SJAhelper.h</FilenameWithoutPath>

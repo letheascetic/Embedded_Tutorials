@@ -8,7 +8,7 @@
   <Extensions>
     <cExt>*.c</cExt>
     <aExt>*.s*; *.src; *.a*</aExt>
-    <oExt>*.obj; *.o</oExt>
+    <oExt>*.obj</oExt>
     <lExt>*.lib</lExt>
     <tExt>*.txt; *.h; *.inc</tExt>
     <pExt>*.plm</pExt>
@@ -22,28 +22,28 @@
 
   <Target>
     <TargetName>Target 1</TargetName>
-    <ToolsetNumber>0x0</ToolsetNumber>
-    <ToolsetName>MCS-51</ToolsetName>
+    <ToolsetNumber>0x4</ToolsetNumber>
+    <ToolsetName>ARM-ADS</ToolsetName>
     <TargetOption>
-      <CLK51>33000000</CLK51>
+      <CLKADS>12000000</CLKADS>
       <OPTTT>
-        <gFlags>1</gFlags>
+        <gFlags>0</gFlags>
         <BeepAtEnd>1</BeepAtEnd>
         <RunSim>1</RunSim>
         <RunTarget>0</RunTarget>
       </OPTTT>
       <OPTHX>
-        <HexSelection>0</HexSelection>
+        <HexSelection>1</HexSelection>
         <FlashByte>65535</FlashByte>
         <HexRangeLowAddress>0</HexRangeLowAddress>
         <HexRangeHighAddress>0</HexRangeHighAddress>
         <HexOffset>0</HexOffset>
       </OPTHX>
       <OPTLEX>
-        <PageWidth>120</PageWidth>
-        <PageLength>65</PageLength>
+        <PageWidth>79</PageWidth>
+        <PageLength>66</PageLength>
         <TabStop>8</TabStop>
-        <ListingPath>.\Listings\</ListingPath>
+        <ListingPath>.\</ListingPath>
       </OPTLEX>
       <ListingPage>
         <CreateCListing>1</CreateCListing>
@@ -75,28 +75,43 @@
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
-      <CpuCode>255</CpuCode>
+      <CpuCode>8</CpuCode>
       <Books>
         <Book>
           <Number>0</Number>
           <Title>Data Sheet</Title>
-          <Path>DATASHTS\ATMEL\AT89S52_DS.PDF</Path>
+          <Path>DATASHTS\PHILIPS\LPC176x_DS.pdf</Path>
         </Book>
         <Book>
           <Number>1</Number>
-          <Title>Instruction Set Manual</Title>
-          <Path>DATASHTS\ATMEL\AT_C51ISM.PDF</Path>
+          <Title>User Manual</Title>
+          <Path>DATASHTS\PHILIPS\LPC17xx_UM.pdf</Path>
+        </Book>
+        <Book>
+          <Number>2</Number>
+          <Title>Errata Sheet</Title>
+          <Path>DATASHTS\PHILIPS\LPC1768_ES.pdf</Path>
+        </Book>
+        <Book>
+          <Number>3</Number>
+          <Title>Technical Reference Manual</Title>
+          <Path>datashts\arm\cortex_m3\r2p1\DDI0337I_CORTEXM3_R2P1_TRM.PDF</Path>
+        </Book>
+        <Book>
+          <Number>4</Number>
+          <Title>Generic User Guide</Title>
+          <Path>datashts\arm\cortex_m3\r2p1\DUI0552A_CORTEX_M3_DGUG.PDF</Path>
         </Book>
       </Books>
       <DllOpt>
-        <SimDllName>S8051.DLL</SimDllName>
-        <SimDllArguments></SimDllArguments>
-        <SimDlgDllName>DP51.DLL</SimDlgDllName>
-        <SimDlgDllArguments>-pAT52</SimDlgDllArguments>
-        <TargetDllName>S8051.DLL</TargetDllName>
-        <TargetDllArguments></TargetDllArguments>
-        <TargetDlgDllName>TP51.DLL</TargetDlgDllName>
-        <TargetDlgDllArguments>-pAT52</TargetDlgDllArguments>
+        <SimDllName>SARMCM3.DLL</SimDllName>
+        <SimDllArguments>-MPU</SimDllArguments>
+        <SimDlgDllName>DARMP1.DLL</SimDlgDllName>
+        <SimDlgDllArguments>-pLPC1768</SimDlgDllArguments>
+        <TargetDllName>SARMCM3.DLL</TargetDllName>
+        <TargetDllArguments>-MPU</TargetDllArguments>
+        <TargetDlgDllName>TARMP1.DLL</TargetDlgDllName>
+        <TargetDlgDllArguments>-pLPC1768</TargetDlgDllArguments>
       </DllOpt>
       <DebugOpt>
         <uSim>1</uSim>
@@ -118,7 +133,7 @@
         <tRtrace>1</tRtrace>
         <sRunDeb>0</sRunDeb>
         <sLrtime>0</sLrtime>
-        <nTsel>-1</nTsel>
+        <nTsel>1</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
         <sDlgDll></sDlgDll>
@@ -129,32 +144,25 @@
         <tDlgDll></tDlgDll>
         <tDlgPa></tDlgPa>
         <tIfile></tIfile>
-        <pMon></pMon>
+        <pMon>BIN\UL2CM3.DLL</pMon>
       </DebugOpt>
       <TargetDriverDllRegistry>
         <SetRegEntry>
           <Number>0</Number>
-          <Key>DLGDP51</Key>
-          <Name>(98=-1,-1,-1,-1,0)(82=-1,-1,-1,-1,0)(83=-1,-1,-1,-1,0)(84=-1,-1,-1,-1,0)(85=-1,-1,-1,-1,0)(99=-1,-1,-1,-1,0)(91=-1,-1,-1,-1,0)(92=-1,-1,-1,-1,0)(93=-1,-1,-1,-1,0)</Name>
+          <Key>UL2CM3</Key>
+          <Name>-O463 -S0 -C0 -FO7 -FD10000000 -FC800 -FN1 -FF0LPC_IAP_512 -FS00 -FL080000)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
       <Breakpoint/>
-      <WatchWindow2>
-        <Ww>
-          <count>0</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>sr</ItemText>
-        </Ww>
-      </WatchWindow2>
       <DebugFlag>
         <trace>0</trace>
         <periodic>1</periodic>
-        <aLwin>1</aLwin>
+        <aLwin>0</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>
         <aPa>0</aPa>
-        <viewmode>1</viewmode>
+        <viewmode>0</viewmode>
         <vrSel>0</vrSel>
         <aSym>0</aSym>
         <aTbox>0</aTbox>
@@ -191,94 +199,14 @@
       <FileNumber>1</FileNumber>
       <FileType>2</FileType>
       <tvExp>0</tvExp>
-      <Focus>1</Focus>
-      <ColumnNumber>2625520</ColumnNumber>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>5</CurrentLine>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\STARTUP.A51</PathWithFileName>
-      <FilenameWithoutPath>STARTUP.A51</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>1</GroupNumber>
-      <FileNumber>2</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <Focus>1</Focus>
-      <ColumnNumber>33</ColumnNumber>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>17</CurrentLine>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\SJAhelper.c</PathWithFileName>
-      <FilenameWithoutPath>SJAhelper.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>1</GroupNumber>
-      <FileNumber>3</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <Focus>1</Focus>
-      <ColumnNumber>2625520</ColumnNumber>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>5</CurrentLine>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\SJA1000REG.h</PathWithFileName>
-      <FilenameWithoutPath>SJA1000REG.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>1</GroupNumber>
-      <FileNumber>4</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <Focus>1</Focus>
-      <ColumnNumber>10</ColumnNumber>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>15</TopLine>
-      <CurrentLine>41</CurrentLine>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\util.c</PathWithFileName>
-      <FilenameWithoutPath>util.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>1</GroupNumber>
-      <FileNumber>5</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <Focus>1</Focus>
+      <Focus>0</Focus>
       <ColumnNumber>21</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>11</CurrentLine>
+      <TopLine>61</TopLine>
+      <CurrentLine>70</CurrentLine>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\test.c</PathWithFileName>
-      <FilenameWithoutPath>test.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>1</GroupNumber>
-      <FileNumber>6</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <Focus>1</Focus>
-      <ColumnNumber>2625520</ColumnNumber>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>5</CurrentLine>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\SJAhelper.h</PathWithFileName>
-      <FilenameWithoutPath>SJAhelper.h</FilenameWithoutPath>
+      <PathWithFileName>.\startup_LPC17xx.s</PathWithFileName>
+      <FilenameWithoutPath>startup_LPC17xx.s</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
