@@ -34,14 +34,18 @@
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="CAN-bus_data_link_layer.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_data_link_layer.md">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret selection-end-column="34" />
+            </state>
+          </provider>
         </entry>
       </file>
-      <file leaf-file-name="CAN-bus_physical_layer.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_physical_layer.md">
+      <file leaf-file-name="reg.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lpc17xx/reg.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="483">
+              <caret line="21" column="39" lean-forward="true" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -106,6 +110,7 @@
         <option value="$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_data_link_layer.md" />
         <option value="$PROJECT_DIR$/CAN-bus_tutorials/README.md" />
         <option value="$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_application_layer.md" />
+        <option value="$PROJECT_DIR$/lpc17xx/reg.md" />
       </list>
     </option>
   </component>
@@ -134,12 +139,7 @@
             <path>
               <item name="Embedded_Tutorials" type="b2602c69:ProjectViewProjectNode" />
               <item name="Embedded_Tutorials" type="462c0819:PsiDirectoryNode" />
-              <item name="CAN-bus_tutorials" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Embedded_Tutorials" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Embedded_Tutorials" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
+              <item name="lpc17xx" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -222,8 +222,8 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.48660713" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" id="Data View" order="3" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -231,23 +231,23 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.120469086" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Data View" order="3" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="right" id="Data View" order="3" />
+      <window_info anchor="bottom" id="Python Console" order="9" weight="0.26674107" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39955357" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.4375" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" visible="true" weight="0.116071425" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Python Console" order="9" weight="0.26674107" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -271,13 +271,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protocol/UART.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" selection-start-line="11" selection-end-line="11" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protocol/CAN.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="741">
@@ -485,9 +478,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_introduction.md" />
-    <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_data_link_layer.md">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_application_layer.md" />
     <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/README.md">
       <provider selected="true" editor-type-id="text-editor">
@@ -498,8 +488,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_physical_layer.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="115">
+          <caret line="5" column="6" lean-forward="true" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CAN-bus_tutorials/CAN-bus_data_link_layer.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lpc17xx/reg.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="21" column="39" lean-forward="true" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
         </state>
       </provider>
     </entry>
